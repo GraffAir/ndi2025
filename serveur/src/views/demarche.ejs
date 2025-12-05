@@ -1,316 +1,117 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Démarche NIRD - Les Jalons</title>
-    <style>
-        /* --- CONFIGURATION DE BASE --- */
-        :root {
-            --primary-violet: #764ba2;
-            --secondary-blue: #667eea;
-            --accent-pink: #f093fb;
-
-            /* FOND TRES SOMBRE (Presque noir pur) */
-            --bg-dark: #05040a;
-
-            /* TEXTE TRES CLAIR (Blanc cassé pour ne pas éblouir) */
-            --text-main: #f3f4f6;
-
-            /* FOND DES CARTES : Beaucoup plus foncé et plus opaque pour la lisibilité */
-            /* On passe d'une transparence de 0.3 à 0.8/0.9 (très sombre) */
-            --glass-gradient: linear-gradient(145deg, rgba(30, 20, 60, 0.85), rgba(15, 15, 25, 0.95));
-            
-            --glass-border: rgba(139, 92, 246, 0.2);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            line-height: 1.6;
-            min-height: 100vh;
-            padding-bottom: 80px;
-        }
-
-        /* Arrière-plan d'ambiance (Lueurs très subtiles pour ne pas gêner la lecture) */
-        .ambient-glow {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background:
-                radial-gradient(circle at 15% 25%, rgba(118, 75, 162, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 85% 75%, rgba(102, 126, 234, 0.05) 0%, transparent 40%);
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 40px 24px;
-        }
-
-        /* --- TYPOGRAPHIE --- */
-        h2 {
-            font-size: 28px;
-            font-weight: 800;
-            margin-bottom: 20px;
-            color: #fff; /* Blanc pur pour les titres */
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, #ffffff 40%, var(--accent-pink) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
-        }
-
-        a {
-            color: var(--accent-pink);
-            text-decoration: none;
-            transition: color 0.3s ease;
-            font-weight: 500;
-            border-bottom: 1px dotted var(--accent-pink);
-        }
-        a:hover {
-            color: #fff;
-            border-bottom-style: solid;
-        }
-
-        p { margin-bottom: 1.5rem; font-size: 1.1rem; opacity: 1; /* Opacité max pour lecture */ }
-
-        /* --- INTRODUCTION BOX --- */
-        .intro-box {
-            background: rgba(40, 30, 60, 0.8); /* Plus foncé */
-            border-left: 4px solid var(--accent-pink);
-            padding: 24px;
-            border-radius: 16px;
-            margin-bottom: 60px;
-            border: 1px solid var(--glass-border);
-        }
-
-        .intro-box p:last-child { margin-bottom: 0; }
-
-        /* --- CARTES DES JALONS --- */
-        .timeline-section {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-        }
-
-        .milestone-card {
-            background: var(--glass-gradient);
-            /* Backdrop filter conservé pour l'esthétique, mais le fond est sombre */
-            backdrop-filter: blur(10px); 
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 40px;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s ease, border-color 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Ombre plus marquée */
-        }
-
-        .milestone-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-pink);
-        }
-
-        /* Numéro décoratif en arrière-plan */
-        .milestone-number {
-            position: absolute;
-            top: -30px;
-            right: -10px;
-            font-size: 180px;
-            font-weight: 900;
-            color: rgba(255, 255, 255, 0.03); /* Très discret */
-            line-height: 1;
-            z-index: 0;
-            user-select: none;
-            pointer-events: none;
-        }
-
-        .card-content { position: relative; z-index: 1; }
-
-        .milestone-header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-
-        .badge {
-            background: linear-gradient(135deg, var(--secondary-blue), var(--primary-violet));
-            color: white;
-            padding: 6px 16px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            box-shadow: 0 4px 15px rgba(0,0,0, 0.4);
-        }
-
-        .milestone-objective {
-            font-style: italic;
-            color: rgba(255, 255, 255, 0.9); /* Plus blanc pour contraste */
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 20px;
-            margin-bottom: 24px;
-            font-size: 1.15rem;
-        }
-
-        /* Listes stylisées */
-        ul.styled-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        ul.styled-list li {
-            position: relative;
-            padding-left: 30px;
-            margin-bottom: 16px;
-            font-size: 1.05rem;
-            color: #e5e7eb; /* Gris très clair */
-        }
-
-        ul.styled-list li::before {
-            content: '▹';
-            position: absolute;
-            left: 0;
-            color: var(--accent-pink);
-            font-size: 1.3rem;
-            top: -3px;
-        }
-
-        .result-box {
-            /* Fond sombre uni pour garantir la lecture */
-            background: rgba(20, 15, 35, 0.6); 
-            border-radius: 12px;
-            padding: 20px;
-            margin-top: 30px;
-            border-left: 3px solid var(--secondary-blue);
-        }
-
-        .result-box strong { color: #fff; display: block; margin-bottom: 6px; font-size: 1.1rem; }
-
-        /* Mobile */
-        @media (max-width: 768px) {
-            .container { padding: 30px 16px; }
-            h1 { font-size: 32px !important; }
-            h2 { font-size: 24px; }
-            .milestone-card { padding: 24px; }
-            .milestone-number { font-size: 120px; top: -20px; right: -10px; opacity: 0.5; }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="ambient-glow"></div>
-
-    <div class="container">
-
-        <header style="text-align: center; margin-bottom: 60px;">
-            <div class="intro-box" style="text-align: left;">
-                <p>Cette page est une <strong>première version de la démarche</strong>. Elle sera mise à jour collectivement par itérations successives en fonction du retour des participants et des échanges sur <a href="https://edurl.fr/tchap-laforgeedu-nird" target="_blank">notre forum Tchap</a>.</p>
-                <p>La <strong>démarche NIRD</strong> (pour un Numérique Inclusif, Responsable et Durable) propose aux établissements scolaires un cheminement progressif en <strong>trois jalons</strong>, de la simple mobilisation à l'intégration structurelle.</p>
-            </div>
-        </header>
-
-        <div class="timeline-section">
-
-            <article class="milestone-card">
-                <div class="milestone-number">1</div>
-                <div class="card-content">
-                    <div class="milestone-header">
-                        <span class="badge">Phase 1</span>
-                        <h2 style="margin:0;">Mobilisation</h2>
-                    </div>
-
-                    <p class="milestone-objective">
-                        <strong>Objectif :</strong> Sensibiliser l'établissement scolaire et initier une dynamique collective autour de la démarche NIRD.
-                    </p>
-
-                    <h3>Actions clés</h3>
-                    <ul class="styled-list">
-                        <li>Identification, par auto-désignation, d'un enseignant volontaire qui devient <strong>contact NIRD</strong>.</li>
-                        <li>Organisation d'un premier <strong>temps d'information</strong> auprès de l'équipe éducative.</li>
-                        <li>Mise en réseau sur <strong>Tchap</strong> avec d'autres établissements pour partager pratiques et ressources.</li>
-                        <li>Diffusion de premiers <strong>supports pédagogiques</strong> pour nourrir la réflexion.</li>
-                        <li>Information de la <strong>direction</strong> pour soutenir le lancement.</li>
-                        <li>Information préliminaire de la <strong>collectivité</strong> (commune, département ou région).</li>
-                    </ul>
-
-                    <div class="result-box">
-                        <strong>Résultat attendu</strong>
-                        Une prise de conscience collective, un premier relais interne identifié et une direction favorable au lancement.
-                    </div>
-                </div>
-            </article>
-
-            <article class="milestone-card">
-                <div class="milestone-number">2</div>
-                <div class="card-content">
-                    <div class="milestone-header">
-                        <span class="badge">Phase 2</span>
-                        <h2 style="margin:0;">Expérimentation</h2>
-                    </div>
-
-                    <p class="milestone-objective">
-                        <strong>Objectif :</strong> Tester des solutions concrètes (Linux, PrimTux) et évaluer leur pertinence.
-                    </p>
-
-                    <h3>Actions clés</h3>
-                    <ul class="styled-list">
-                        <li>Installation de postes neufs ou reconditionnés sous <a href="https://nird.forge.apps.education.fr/linux/">Linux</a>.</li>
-                        <li><strong>Collèges/Lycées :</strong> Création d'un club informatique pour le <a href="https://nird.forge.apps.education.fr/reconditionnement/">reconditionnement</a> par les élèves.</li>
-                        <li><strong>Écoles :</strong> Priorité à <strong>PrimTux</strong> et actions de reconditionnement en cycle 3 ou périscolaire.</li>
-                        <li>Séances d'appropriation et de <strong>formation</strong> enseignants/élèves.</li>
-                        <li>Le contact initial devient <strong>coordinateur NIRD</strong>.</li>
-                        <li>Suivi par la direction (impact pédagogique/technique) et échanges logistiques avec la collectivité.</li>
-                    </ul>
-
-                    <div class="result-box">
-                        <strong>Résultat attendu</strong>
-                        Une première expérience concrète documentée, avec une direction impliquée et une collectivité intégrée à la réflexion.
-                    </div>
-                </div>
-            </article>
-
-            <article class="milestone-card">
-                <div class="milestone-number">3</div>
-                <div class="card-content">
-                    <div class="milestone-header">
-                        <span class="badge">Phase 3</span>
-                        <h2 style="margin:0;">Intégration</h2>
-                    </div>
-
-                    <p class="milestone-objective">
-                        <strong>Objectif :</strong> Inscrire durablement la démarche NIRD dans la structure et le projet d'établissement.
-                    </p>
-
-                    <h3>Actions clés</h3>
-                    <ul class="styled-list">
-                        <li>Intégration des postes au <strong>parc informatique officiel</strong> et au réseau de la collectivité.</li>
-                        <li>Inscription dans le <strong>projet d'établissement</strong> (CA, axes pédagogiques).</li>
-                        <li>Valorisation de l'expérience (interne/externe) et le coordinateur devient <strong>référent NIRD</strong>.</li>
-                        <li>La <strong>direction pilote</strong> la démarche officiellement.</li>
-                        <li>Coopération structurée avec la <strong>collectivité</strong> (maintenance, sécurité, financement).</li>
-                    </ul>
-
-                    <div class="result-box">
-                        <strong>Résultat attendu</strong>
-                        Une intégration complète, soutenue institutionnellement, connectée à la collectivité, et inscrite dans la durée.
-                    </div>
-                </div>
-            </article>
-
-        </div>
-
+<div style="text-align: center; margin-bottom: 60px;">
+    <div class="intro-box" style="text-align: left;">
+        <p>Cette page est une <strong>première version de la démarche</strong>. Elle sera mise à jour collectivement par
+            itérations successives en fonction du retour des participants et des échanges sur <a
+                href="https://edurl.fr/tchap-laforgeedu-nird" target="_blank">notre forum Tchap</a>.</p>
+        <p>La <strong>démarche NIRD</strong> (pour un Numérique Inclusif, Responsable et Durable) propose aux
+            établissements scolaires un cheminement progressif en <strong>trois jalons</strong>, de la simple
+            mobilisation à l'intégration structurelle.</p>
     </div>
+</div>
 
-</body>
-</html>
+<div class="timeline-section">
+
+    <article class="milestone-card">
+        <div class="milestone-number">1</div>
+        <div class="card-content">
+            <div class="milestone-header">
+                <span class="badge">Phase 1</span>
+                <h2 style="margin:0;">Mobilisation</h2>
+            </div>
+
+            <p class="milestone-objective">
+                <strong>Objectif :</strong> Sensibiliser l'établissement scolaire et initier une dynamique collective
+                autour de la démarche NIRD.
+            </p>
+
+            <h3>Actions clés</h3>
+            <ul class="styled-list">
+                <li>Identification, par auto-désignation, d'un enseignant volontaire qui devient <strong>contact
+                        NIRD</strong>.</li>
+                <li>Organisation d'un premier <strong>temps d'information</strong> auprès de l'équipe éducative.</li>
+                <li>Mise en réseau sur <strong>Tchap</strong> avec d'autres établissements pour partager pratiques et
+                    ressources.</li>
+                <li>Diffusion de premiers <strong>supports pédagogiques</strong> pour nourrir la réflexion.</li>
+                <li>Information de la <strong>direction</strong> pour soutenir le lancement.</li>
+                <li>Information préliminaire de la <strong>collectivité</strong> (commune, département ou région).</li>
+            </ul>
+
+            <div class="result-box">
+                <strong>Résultat attendu</strong>
+                Une prise de conscience collective, un premier relais interne identifié et une direction favorable au
+                lancement.
+            </div>
+        </div>
+    </article>
+
+    <article class="milestone-card">
+        <div class="milestone-number">2</div>
+        <div class="card-content">
+            <div class="milestone-header">
+                <span class="badge">Phase 2</span>
+                <h2 style="margin:0;">Expérimentation</h2>
+            </div>
+
+            <p class="milestone-objective">
+                <strong>Objectif :</strong> Tester des solutions concrètes (Linux, PrimTux) et évaluer leur pertinence.
+            </p>
+
+            <h3>Actions clés</h3>
+            <ul class="styled-list">
+                <li>Installation de postes neufs ou reconditionnés sous <a
+                        href="https://nird.forge.apps.education.fr/linux/">Linux</a>.</li>
+                <li><strong>Collèges/Lycées :</strong> Création d'un club informatique pour le <a
+                        href="https://nird.forge.apps.education.fr/reconditionnement/">reconditionnement</a> par les
+                    élèves.</li>
+                <li><strong>Écoles :</strong> Priorité à <strong>PrimTux</strong> et actions de reconditionnement en
+                    cycle 3 ou périscolaire.</li>
+                <li>Séances d'appropriation et de <strong>formation</strong> enseignants/élèves.</li>
+                <li>Le contact initial devient <strong>coordinateur NIRD</strong>.</li>
+                <li>Suivi par la direction (impact pédagogique/technique) et échanges logistiques avec la collectivité.
+                </li>
+            </ul>
+
+            <div class="result-box">
+                <strong>Résultat attendu</strong>
+                Une première expérience concrète documentée, avec une direction impliquée et une collectivité intégrée à
+                la réflexion.
+            </div>
+        </div>
+    </article>
+
+    <article class="milestone-card">
+        <div class="milestone-number">3</div>
+        <div class="card-content">
+            <div class="milestone-header">
+                <span class="badge">Phase 3</span>
+                <h2 style="margin:0;">Intégration</h2>
+            </div>
+
+            <p class="milestone-objective">
+                <strong>Objectif :</strong> Inscrire durablement la démarche NIRD dans la structure et le projet
+                d'établissement.
+            </p>
+
+            <h3>Actions clés</h3>
+            <ul class="styled-list">
+                <li>Intégration des postes au <strong>parc informatique officiel</strong> et au réseau de la
+                    collectivité.</li>
+                <li>Inscription dans le <strong>projet d'établissement</strong> (CA, axes pédagogiques).</li>
+                <li>Valorisation de l'expérience (interne/externe) et le coordinateur devient <strong>référent
+                        NIRD</strong>.</li>
+                <li>La <strong>direction pilote</strong> la démarche officiellement.</li>
+                <li>Coopération structurée avec la <strong>collectivité</strong> (maintenance, sécurité, financement).
+                </li>
+            </ul>
+
+            <div class="result-box">
+                <strong>Résultat attendu</strong>
+                Une intégration complète, soutenue institutionnellement, connectée à la collectivité, et inscrite dans
+                la durée.
+            </div>
+        </div>
+    </article>
+
+</div>
+
+</div>

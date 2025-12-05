@@ -1,4 +1,4 @@
-// src/app.js - VERSION CORRIGÉE (i18n fonctionnel + padEnd sécurisé)
+// src/app.js - VERSION ULTRA-COMPLÈTE avec i18next
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
@@ -19,110 +19,190 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(expressLayouts);
 app.set('layout', 'layouts/main');
 
-// 🔥 1.5 MIDDLEWARE i18n GLOBALE ✅ CORRIGÉ
+// 🔥 1.5 CONFIGURATION i18next
+console.log('🌍 [BOOT] Configuration i18next...');
+
+i18next
+  .use(i18nextBackend)
+  .use(i18nextMiddleware.LanguageDetector)
+  .init({
+    fallbackLng: 'fr',
+    supportedLngs: ['fr', 'en', 'es'],
+    preload: ['fr', 'en', 'es'],
+    backend: {
+      loadPath: path.join(__dirname, '..', 'public', 'locales', '{{lng}}', '{{ns}}.json')
+    },
+    detection: {
+      order: ['querystring', 'cookie', 'header'],
+      lookupQuerystring: 'lng',
+      lookupCookie: 'i18next',
+      caches: ['cookie']
+    },
+    interpolation: {
+      escapeValue: false // EJS échappe déjà
+    }
+  }, (err, t) => {
+    if (err) {
+      console.error('❌ [i18n] Erreur initialisation:', err.message);
+    } else {
+      console.log('✅ [i18n] Langues chargées: fr, en, es');
+    }
+  });
+
+// Middleware i18next
+app.use(i18nextMiddleware.handle(i18next));
+
+// Helper EJS pour i18n
 app.use((req, res, next) => {
+    // Fonction de traduction disponible dans toutes les vues
+    res.locals.t = req.t.bind(req);
+    res.locals.i18n = req.i18n;
+    res.locals.lng = req.language || req.i18n.language || 'fr';
+    
+    // Fallback pour compatibilité ancienne syntaxe
     res.locals.__ = (key, defaultValue = '') => {
-        const translations = {
-            // Header
-            'site.title': 'Démarche NIRD',
-            
-            // Footer
-            'footer.about_title': 'À propos',
-            'footer.about_text': 'Plateforme collaborative pour les ressources éducatives.',
-            'footer.links_title': 'Liens utiles',
-            'footer.contact_title': 'Contact',
-            
-            // Nav
-            'nav.home': 'Accueil',
-            'nav.softwares': 'Logiciels',
-            'nav.users': 'Utilisateurs'
-        };
-        return translations[key] || defaultValue || key;
+        try {
+            const translation = req.t(key);
+            return translation !== key ? translation : (defaultValue || key);
+        } catch (error) {
+            return defaultValue || key;
+        }
     };
-    res.locals.lng = req.query.lng || 'fr';
+    
     next();
 });
 
-console.log('🌍 [BOOT] i18n GLOBALE ✅ (header/footer OK)');
+console.log('✅ [i18n] Middleware actif - t() et __() disponibles');
 
 // 🔥 2. PARSING MIDDLEWARE
-console.log('🔐 [BOOT] JSON + URLencoded');
+console.log('🔐 [BOOT] JSON + URLencoded + CORS');
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// 🔥 3. LOGGING ULTRA-DÉTAILLÉ ✅ CORRIGÉ
+// 🔥 3. LOGGING ULTRA-DÉTAILLÉ
 app.use((req, res, next) => {
     const start = Date.now();
     const userAgent = req.get('User-Agent') || 'Unknown';
+    const ip = (req.ip || '::ffff:127.0.0.1').padEnd(15);
+    const method = req.method.padEnd(7);
     
-    console.log(`\n🔵 [REQ] ${new Date().toISOString().slice(11, 23)} ${String(req.ip || '::ffff:127.0.0.1').padEnd(15)} ${req.method.padEnd(7)} ${req.originalUrl}`);
+    console.log(`\n🔵 [REQ] ${new Date().toISOString().slice(11, 23)} ${ip} ${method} ${req.originalUrl}`);
     console.log(`   👤 UA: ${userAgent.slice(0, 60)}${userAgent.length > 60 ? '...' : ''}`);
+    console.log(`   🌍 Langue: ${req.language || 'fr'}`);
     
     res.on('finish', () => {
         const duration = Date.now() - start;
-        const size = res.get('Content-Length') || 0;
-        const sizeStr = String(size).padEnd(6);
-        const statusStr = String(res.statusCode).padStart(3);
-        const durationStr = String(duration).padStart(4) + 'ms';
-        console.log(`   🟢 [RES] ${statusStr} ${sizeStr} ${durationStr}`);
+        const size = (res.get('Content-Length') || 0).toString().padEnd(6);
+        const status = res.statusCode.toString().padStart(3);
+        const durationStr = duration.toString().padStart(4) + 'ms';
+        
+        const statusIcon = res.statusCode < 300 ? '🟢' : res.statusCode < 400 ? '🟡' : '🔴';
+        console.log(`   ${statusIcon} [RES] ${status} ${size} ${durationStr}`);
     });
     
-    req._startTime = start;
     next();
 });
 
 // 🔥 4. STATIC FILES
 console.log('📁 [BOOT] Static /public');
-app.use(express.static(path.join(__dirname, 'public')));
+const publicPath = path.join(__dirname, '..', 'public');
+app.use(express.static(publicPath));
+console.log('📂 [BOOT] Public path:', publicPath);
 
-// 🔥 5. LAYOUT GLOBAL
+// 🔥 5. LAYOUT GLOBAL + VARIABLES
 app.use((req, res, next) => {
     res.locals.layout = 'layouts/main';
     res.locals.currentMenu = req.path.split('/')[1] || 'accueil';
+    res.locals.currentPath = req.path;
+    res.locals.query = req.query;
     next();
 });
 
 // 🔥 6. ROUTES PRINCIPALES
-console.log('🛤️ [BOOT] Routes principales');
+console.log('🛤️  [BOOT] Routes principales');
 app.use('/', indexRouter);
 
 // 🔥 7. ERROR HANDLER
 app.use((err, req, res, next) => {
-    console.error(`💥 [ERROR] ${new Date().toISOString()} ${req.method} ${req.originalUrl}`);
-    console.error('   Stack:', err.stack || err.message);
+    const timestamp = new Date().toISOString();
+    console.error(`\n💥 [ERROR] ${timestamp} ${req.method} ${req.originalUrl}`);
+    console.error('   Message:', err.message);
+    console.error('   Stack:', err.stack);
     
     if (!res.headersSent) {
-        res.status(500).render('error', { 
+        res.status(err.status || 500).render('error', { 
             message: err.message || 'Erreur serveur',
-            status: 500,
-            stack: process.env.NODE_ENV === 'development' ? err.stack : undefined
+            status: err.status || 500,
+            stack: process.env.NODE_ENV === 'development' ? err.stack : undefined,
+            showHeader: true,
+            showFooter: true
         });
     }
 });
 
-// 🔥 8. 404 CORRIGÉ
+// 🔥 8. 404 HANDLER
 app.use((req, res) => {
     console.log(`🔴 [404] ${req.method} ${req.originalUrl}`);
     res.status(404).render('error', { 
         message: `Page non trouvée: ${req.originalUrl}`,
-        status: 404
+        status: 404,
+        showHeader: true,
+        showFooter: true
     });
 });
 
-console.log('🗄️ [BOOT] DB controllers chargés (pilotes=18, linux, users...)');
+console.log('🗄️  [BOOT] DB controllers chargés (pilotes, linux, users...)');
 
+// 🔥 9. DÉMARRAGE SERVEUR
 app.listen(PORT, () => {
-    console.log(`\n🎉 [SERVEUR] http://localhost:${PORT}`);
-    console.log(`📱 Pages: / /pilotes /linux /demarche /utilisateurs /qcm /categories /reconditionnement`);
-    console.log(`🔍 APIs: /api/pilotes/map /api/linux/distributions /api/qcm`);
-    console.log(`💾 DB: pilotes(18) utilisateurs logiciels qcms categories`);
-    console.log(`🌍 Langue: ?lng=en pour anglais`);
-    console.log(`✅ i18n: __() fonctionnel partout (header/footer OK)`);
-    console.log(`\n⏳ Serveur prêt - Logs ACTIVÉS !\n`);
+    console.log('\n' + '='.repeat(60));
+    console.log(`🎉 [SERVEUR] Démarré sur http://localhost:${PORT}`);
+    console.log('='.repeat(60));
+    console.log('\n📱 Pages disponibles:');
+    console.log('   / - Accueil');
+    console.log('   /pilotes - Établissements pilotes');
+    console.log('   /linux - Distributions Linux');
+    console.log('   /demarche - La démarche NIRD');
+    console.log('   /utilisateurs - Gestion utilisateurs');
+    console.log('   /reconditionnement - Reconditionnement');
+    console.log('   /pourquoi - Pourquoi NIRD');
+    
+    console.log('\n🔍 APIs disponibles:');
+    console.log('   /api/pilotes/map - Carte GPS');
+    console.log('   /api/linux/distributions - Liste distributions');
+    
+    console.log('\n💾 Base de données:');
+    console.log('   pilotes (18 établissements)');
+    console.log('   utilisateurs');
+    console.log('   logiciels');
+    console.log('   categories');
+    
+    console.log('\n🌍 Internationalisation:');
+    console.log('   ?lng=fr - Français (défaut)');
+    console.log('   ?lng=en - English');
+    console.log('   ?lng=es - Español');
+    console.log('   Fonctions: t() et __() disponibles partout');
+    
+    console.log('\n✅ Serveur prêt - Logs ACTIVÉS');
+    console.log('='.repeat(60) + '\n');
 });
 
-// 💓 HEARTBEAT
+// 💓 HEARTBEAT (optionnel - commenter si logs trop verbeux)
 setInterval(() => {
-    console.log(`💓 [ALIVE] ${new Date().toLocaleTimeString()}`);
-}, 60000);
+    const time = new Date().toLocaleTimeString('fr-FR');
+    console.log(`💓 [ALIVE] ${time} - Serveur actif`);
+}, 60000); // Toutes les minutes
+
+// 🔄 GRACEFUL SHUTDOWN
+process.on('SIGINT', () => {
+    console.log('\n\n🛑 [SHUTDOWN] Arrêt gracieux du serveur...');
+    process.exit(0);
+});
+
+process.on('SIGTERM', () => {
+    console.log('\n\n🛑 [SHUTDOWN] Signal SIGTERM reçu...');
+    process.exit(0);
+});
+
+module.exports = app;
