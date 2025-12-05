@@ -72,6 +72,9 @@ function naviguer(){
         case "quiz/eleve-implication":
             window.location.href = "template.html?page=quiz/navigateur";
             break;
+        case "quiz/navigateur":
+            window.location.href = "template.html?page=quiz/recherche";
+            break;
         default:
             window.location.href = "template.html?page=quiz/debut";
     }
