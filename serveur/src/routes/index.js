@@ -1,6 +1,8 @@
 ﻿// src/routes/index.js - VERSION ULTRA-SIMPLIFIÉE + NIRD COMPLET + APPS DB ✅ + 🔧 RECONDITIONNEMENT
 const express = require('express');
 const router = express.Router();
+const path = require('path');
+const fs = require('fs');
 
 const sqlite3 = require('sqlite3').verbose();
 const GenericController = require('../controllers/genericController.cjs');
@@ -273,6 +275,15 @@ router.get('/outils', (req, res) => {
   res.render('outils', {
     title: 'Outils NIRD',
     layout: 'layouts/main',
+  });
+});
+
+// 🏛️ COLLECTIVITES - rendu via EJS (intégré au layout)
+console.log('🏛️ [ROUTES] Collectivites (EJS view)');
+router.get('/collectivites', (req, res) => {
+  res.render('collectivites', {
+    title: 'Collectivités & Démarche NIRD',
+    layout: 'layouts/main'
   });
 });
 

@@ -23,7 +23,7 @@ img{max-width:100%; display:block;}
 @import "./base.css";
 @import "./layout.css";
 @import "./components/buttons.css";
-@import "./components/cards.css";
+@import "./components/card.css";
 @import "./utilities.css";
 @import "./responsive.css";
 
@@ -553,7 +553,7 @@ img{max-width:100%; display:block;}
 @import "./base.css";
 @import "./layout.css";
 @import "./components/buttons.css";
-@import "./components/cards.css";
+@import "./components/card.css";
 @import "./utilities.css";
 @import "./responsive.css";
 
