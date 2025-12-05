@@ -1,0 +1,62 @@
+<%# Quiz NIRD - Page principale du questionnaire %>
+
+<div class="quiz-container">
+  <div class="quiz-header">
+    <h1>🎯 Quiz NIRD</h1>
+    <p>Évaluez l'engagement numérique libre de votre établissement</p>
+  </div>
+
+  <div class="quiz-progress">
+    <div class="quiz-progress-bar" style="width: 0%"></div>
+  </div>
+  <div class="quiz-step-indicator">Étape 1 sur 10</div>
+
+  <div id="main-content">
+    <!-- Le contenu des questions sera chargé dynamiquement ici -->
+    <h2>Quel est ton rôle au sein de l'établissement scolaire ?</h2>
+    <div class="quiz-tableau">
+      <div class="categorie bg-red">
+        <h3>Public</h3>
+        <p>Je ne suis pas dans un établissement scolaire</p>
+        <button class="btn-choisir" data-index="quizRole" data-reponse="public">
+          Choisir
+        </button>
+      </div>
+      <div class="categorie bg-yellow">
+        <h3>Élève</h3>
+        <p>Je suis un étudiant ou un élève dans un établissement scolaire</p>
+        <button class="btn-choisir" data-index="quizRole" data-reponse="eleve">
+          Choisir
+        </button>
+      </div>
+      <div class="categorie bg-green">
+        <h3>Enseignant ou personnel</h3>
+        <p>
+          J'enseigne au sein d'un établissement scolaire, ou je suis membre de
+          son personnel.
+        </p>
+        <button
+          class="btn-choisir"
+          data-index="quizRole"
+          data-reponse="personnel"
+        >
+          Choisir
+        </button>
+      </div>
+      <div class="categorie bg-purple">
+        <h3>Parent</h3>
+        <p>Suivi des résultats et actualités pour les parents.</p>
+        <button class="btn-choisir" data-index="quizRole" data-reponse="parent">
+          Choisir
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="quiz-navigation">
+    <button class="btn-quiz-nav btn-prev" style="visibility: hidden">
+      <i class="fas fa-arrow-left"></i> Précédent
+    </button>
+    <span></span>
+  </div>
+</div>

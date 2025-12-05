@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Formulaire de la gloire</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/css/formGloire.css" />
+    <script src="/js/formGloire.js"></script>
+  </head>
+
+  <div id="pop1" class="overlay">
+    <div class="popup">
+      <p class="rainbow-text">Vous êtes sûr de valider ?</p>
+      <div class="buttons">
+        <a href="#pop2" class="btn-oui">Oui</a>
+        <a href="#lose" class="btn-non">Non</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="pop2" class="overlay">
+    <div class="popup">
+      <p class="rainbow-text">Vous êtes vraiment sûr de valider ?</p>
+      <div class="buttons">
+        <a href="#pop3" class="btn-oui">Oui</a>
+        <a href="#lose" class="btn-non">Non</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="pop3" class="overlay">
+    <div class="popup">
+      <p class="rainbow-text">Vous êtes vraiment vraiment sûr de valider ?</p>
+      <div class="buttons">
+        <a href="#lose" class="btn-oui">Non</a>
+        <a href="#pop4" class="btn-non">Oui</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="pop4" class="overlay">
+    <div class="popup">
+      <p class="rainbow-text">
+        Vous êtes vraiment vraiment vraiment sûr de valider ?
+      </p>
+      <div class="buttons">
+        <a href="#pop5" class="btn-oui">Oui</a>
+        <a href="#lose" class="btn-non">Non</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="pop5" class="overlay">
+    <div class="popup">
+      <p class="rainbow-text">
+        Vous êtes vraiment vraiment vraiment vraiment sûr de valider ?
+      </p>
+      <div class="buttons">
+        <a href="#lose" class="btn-oui">Non</a>
+        <a href="#pop6" class="btn-non">Oui</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="pop6" class="overlay">
+    <div class="popup">
+      <p class="rainbow-text">
+        Vous êtes vraiment vraiment vraiment vraiment vraiment sûr de valider ?
+      </p>
+      <div class="buttons">
+        <a href="#pop7" class="btn-oui">Oui</a>
+        <a href="#lose" class="btn-non">Non</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="pop7" class="overlay">
+    <div class="popup">
+      <p class="rainbow-text">
+        Voulez vous vraiment vraiment vraiment vraiment vraiment vraiment un
+        screamer de Foxy ?
+      </p>
+      <div class="buttons">
+        <a href="#petit_renard" class="btn-oui">Oui</a>
+        <a href="#pop8" class="btn-non">Non</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="pop8" class="overlay">
+    <div class="popup">
+      <p class="rainbow-text">
+        Vous êtes vraiment vraiment vraiment vraiment vraiment vraiment vraiment
+        sûr de valider ?
+      </p>
+      <div class="buttons">
+        <a href="#congratulation" class="btn-oui">Oui</a>
+        <a href="#lose" class="btn-non">Non</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="petit_renard" class="overlay">
+    <div class="popup">
+      <a href="#" class="close">&times;</a>
+      <img
+        src="img/petit_renard.gif"
+        alt="cette image est un adorable petit renard qui réclame des câlins"
+      />
+    </div>
+  </div>
+
+  <div id="congratulation" class="overlay">
+    <div class="popup">
+      <a href="#" class="close">&times;</a>
+      <p class="rainbow-text">Vous avez réussi !!!</p>
+      <img
+        src="img/congrat.gif"
+        alt="cette image est un homme qui vous félicite"
+      />
+    </div>
+  </div>
+
+  <div id="lose" class="overlay">
+    <div class="popup">
+      <a href="#" class="close">&times;</a>
+      <p class="rainbow-text">Vous n'avez pas validé !!!</p>
+      <img
+        src="img/cry.gif"
+        alt="cette image est un chat qui pleure car vous n'avez pas réussi a validé"
+      />
+    </div>
+  </div>
+
+  <body>
+    <video id="bg-video" autoplay loop muted playsinline>
+      <source src="img/BG_TRANS.mp4" type="video/mp4" />
+    </video>
+    <div id="video-overlay" aria-hidden="true"></div>
+
+    <div id="spider-wave">
+      <div>
+        <img
+          src="img/spider-wave.gif"
+          alt="Une araignée qui fait coucou elle vous est sympathique"
+        />
+        <img
+          src="img/spider-mirror.gif"
+          alt="Une araignée qui se regarde dans un miroir elle danse pour son plaisir"
+        />
+        <img
+          src="img/spider-love.gif"
+          alt="Une araignée qui aime beaucoup et veux dormir avec vous pour vous protéger"
+        />
+
+        <img
+          src="img/spider-hide.gif"
+          alt="Une araignée qui se cache elle est timide mais veut vous approcher en secret"
+        />
+        <img
+          src="img/spider-cat.gif"
+          alt="Un chat araignée qui est un mélange entre un chat et une araignée il est très mignon"
+        />
+        <img
+          src="img/friday-pay-day-cat.gif"
+          alt="Un chat qui célèbre le vendredi et le jour de paie il est très heureux"
+        />
+        <img
+          src="img/catnapping-cat-kidnap.gif"
+          alt="Un chat qui se fait kidnapper par un humain dans un sac poubelle il est très surpris"
+        />
+        <img
+          src="img/cat-hurle.gif"
+          alt="Un chat qui hurle il est très expressif et veut attirer votre attention"
+        />
+        <img
+          src="img/cat-scrimer.gif"
+          alt="Un chat qui fait un screamer il est très effrayant"
+        />
+        <img
+          src="img/cry.gif"
+          alt="cet image est un chat qui pleure car vous n'avez pas réussi a validé"
+        />
+        <img
+          src="img/lait-cat.gif"
+          alt="Le chat botté qui boit du lait il est très content"
+        />
+        <img
+          src="img/petit_renard.gif"
+          alt="cette image est un adorable petit renard qui réclame des câlins"
+        />
+        <img
+          src="img/congrat.gif"
+          alt="cet image est un homme qui vous félicite"
+        />
+        <img
+          src="img/dance-leonard.gif"
+          alt="Leonard decaprio qui danse il est très joyeux"
+        />
+      </div>
+    </div>
+
+    <div id="form-div">
+      <h1>Formulaire de la gloire</h1>
+      <form action="." method="post">
+        <label for="name">Nom:</label>
+        <input type="text" id="name" name="name" required /><br /><br />
+
+        <label for="prenom">Prénom:</label>
+        <input type="text" id="prenom" name="prenom" required /><br /><br />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required /><br /><br />
+
+        <label for="subject">sujet:</label>
+        <input type="text" id="subject" name="subject" required /><br /><br />
+
+        <label for="message">Message:</label><br />
+        <textarea id="message" name="message" required></textarea><br /><br />
+
+        <button type="submit">
+          <a href="#pop1">Valider</a>
+        </button>
+      </form>
+    </div>
+
+    <!-- audio FNAF: placez votre fichier audio ici -->
+    <audio id="fnaf-sound" preload="auto">
+      <source src="sounds/fnaf.mp3" type="audio/mpeg" />
+    </audio>
+  </body>
+</html>

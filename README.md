@@ -1,4 +1,6 @@
 # ndi2025
+Nuit de l'info 2025 !
+
 
 Bienvenue sur le dépôt officiel de l'équipe IAMS3 de la **Nuit de l'info édition 2025** !
 
@@ -35,3 +37,8 @@ Cette réalisation a été faite avec une équipe de choc : Baptiste Bradelet, R
 
 ## Licence
 Le code source est publié sous licence **GNU-GPL**, tandis que le contenu textuel et graphique est protégé par la licence **CreativeCommons BY-NC-SA**.
+
+## Développement
+
+Lancer le serveur : node src/app.js
+Puis ouvrir dans un navigateur : http://localhost:3000

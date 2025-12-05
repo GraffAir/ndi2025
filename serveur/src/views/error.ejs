@@ -1,0 +1,32 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <% if (status===404) { %>
+                <div class="display-1 text-warning mb-4">🔍</div>
+                <h1 class="display-4 fw-bold text-muted mb-3">Page non trouvée</h1>
+                <p class="lead text-muted mb-4">
+                    La page "<%= message %>" n'existe pas.
+                </p>
+                <% } else { %>
+                    <div class="display-1 text-danger mb-4">💥</div>
+                    <h1 class="display-4 fw-bold text-danger mb-3">Erreur serveur</h1>
+                    <p class="lead text-muted mb-4">
+                        <%= message %>
+                    </p>
+                    <% } %>
+
+                        <a href="/" class="btn btn-primary btn-lg">
+                            🏠 Retour à l'accueil
+                        </a>
+
+                        <!-- ✅ FIX : Vérification explicite -->
+                        <% if (typeof stack !=='undefined' && stack && process.env.NODE_ENV==='development' ) { %>
+                            <hr class="my-5">
+                            <div class="alert alert-danger">
+                                <h5>🔧 Debug (dev only)</h5>
+                                <pre class="small"><%= stack %></pre>
+                            </div>
+                            <% } %>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+:root{
+  /* Couleurs */
+  --color-bg: #ffffff;
+  --color-text: #222222;
+  --color-primary: #0070f3;
+  --color-muted: #6b7280;
+
+  /* Typographie */
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono";
+
+  /* Espacements */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+
+  /* Border radius & shadows */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+
+  /* Breakpoints */
+  --bp-sm: 640px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+}

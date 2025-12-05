@@ -1,0 +1,197 @@
+/* i18n (Internationalization) CSS */
+
+/* Language-specific font settings */
+html[lang="ar"],
+html[lang="fa"],
+html[lang="he"] {
+  direction: rtl;
+}
+
+html[lang="ar"] body,
+html[lang="fa"] body,
+html[lang="he"] body {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Language indicator badge */
+.language-badge {
+  display: inline-block;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.1);
+  color: #666;
+  margin-left: 8px;
+}
+
+/* Translation loading indicator */
+[data-i18n-loading] {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Translated content fade-in animation */
+[data-i18n] {
+  animation: i18nFadeIn 0.3s ease-in-out;
+}
+
+@keyframes i18nFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Language switcher */
+.i18n-switcher {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.i18n-switcher button,
+.i18n-switcher a {
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.i18n-switcher button:hover,
+.i18n-switcher a:hover {
+  background: #f0f0f0;
+  border-color: #999;
+}
+
+.i18n-switcher button.active,
+.i18n-switcher a.active {
+  background: #667eea;
+  color: white;
+  border-color: #667eea;
+}
+
+/* Missing translation fallback */
+[data-i18n-missing] {
+  background: rgba(255, 193, 7, 0.1);
+  border-left: 3px solid #ffc107;
+  padding-left: 8px;
+  font-style: italic;
+  color: #ff6f00;
+}
+
+/* RTL adjustments */
+[dir="rtl"] .i18n-switcher {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] [data-i18n-missing] {
+  border-left: none;
+  border-right: 3px solid #ffc107;
+  padding-left: 0;
+  padding-right: 8px;
+}
+
+/* i18n (Internationalization) CSS */
+
+/* Language-specific font settings */
+html[lang="ar"],
+html[lang="fa"],
+html[lang="he"] {
+  direction: rtl;
+}
+
+html[lang="ar"] body,
+html[lang="fa"] body,
+html[lang="he"] body {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Language indicator badge */
+.language-badge {
+  display: inline-block;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.1);
+  color: #666;
+  margin-left: 8px;
+}
+
+/* Translation loading indicator */
+[data-i18n-loading] {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Translated content fade-in animation */
+[data-i18n] {
+  animation: i18nFadeIn 0.3s ease-in-out;
+}
+
+@keyframes i18nFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Language switcher */
+.i18n-switcher {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.i18n-switcher button,
+.i18n-switcher a {
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.i18n-switcher button:hover,
+.i18n-switcher a:hover {
+  background: #f0f0f0;
+  border-color: #999;
+}
+
+.i18n-switcher button.active,
+.i18n-switcher a.active {
+  background: #667eea;
+  color: white;
+  border-color: #667eea;
+}
+
+/* Missing translation fallback */
+[data-i18n-missing] {
+  background: rgba(255, 193, 7, 0.1);
+  border-left: 3px solid #ffc107;
+  padding-left: 8px;
+  font-style: italic;
+  color: #ff6f00;
+}
+
+/* RTL adjustments */
+[dir="rtl"] .i18n-switcher {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] [data-i18n-missing] {
+  border-left: none;
+  border-right: 3px solid #ffc107;
+  padding-left: 0;
+  padding-right: 8px;
+}

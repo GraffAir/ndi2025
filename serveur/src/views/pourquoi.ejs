@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pourquoi la démarche NIRD ?</title>
+    <style>
+        /* --- DESIGN SYSTEM "NUIT PROFONDE" --- */
+        :root {
+            --primary-violet: #764ba2;
+            --secondary-blue: #667eea;
+            --accent-pink: #f093fb;
+            --bg-dark: #05040a;
+            --text-main: #f3f4f6;
+            --text-muted: #d1d5db;
+            
+            /* Styles des blocs en verre */
+            --glass-bg: rgba(30, 20, 60, 0.7);
+            --glass-border: rgba(139, 92, 246, 0.2);
+            --card-hover-border: rgba(240, 147, 251, 0.5);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.7;
+            min-height: 100vh;
+            padding-bottom: 80px;
+        }
+
+        /* Arrière-plan d'ambiance */
+        .ambient-glow {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background:
+                radial-gradient(circle at 5% 10%, rgba(118, 75, 162, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 95% 90%, rgba(102, 126, 234, 0.05) 0%, transparent 40%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: clamp(32px, 5vw, 42px);
+            font-weight: 900;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #ffffff 40%, var(--accent-pink) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+        
+        .glass-panel p {
+            color: #e5e7eb;
+        }
+
+        strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        em {
+            color: var(--accent-pink);
+            font-style: normal;
+        }
+
+        /* --- BLOCS DE CONTENU --- */
+        
+        /* Intro Box */
+        .intro-box {
+            background: rgba(40, 30, 60, 0.6);
+            border-left: 4px solid var(--accent-pink);
+            padding: 32px;
+            border-radius: 16px;
+            margin-bottom: 40px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+        }
+        
+        .intro-box p:last-child { margin-bottom: 0; }
+
+        /* Panneau de contenu standard */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 32px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Citations Grid */
+        .quotes-title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 800;
+            color: #fff;
+            margin: 60px 0 30px;
+        }
+
+        .quote-card {
+            /* FOND MODIFIÉ : Beaucoup plus sombre et opaque pour le contraste */
+            background: rgba(15, 12, 28, 0.85); 
+            border: 1px solid rgba(139, 92, 246, 0.15);
+            border-left: 4px solid var(--secondary-blue);
+            border-radius: 16px;
+            padding: 24px 30px;
+            margin-bottom: 20px;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        .quote-card:hover {
+            transform: translateX(5px);
+            border-left-color: var(--accent-pink);
+            background: rgba(20, 16, 35, 0.95);
+            border-color: rgba(240, 147, 251, 0.3);
+        }
+
+        blockquote {
+            margin: 0;
+            font-size: 1.1rem;
+            color: #ffffff; /* Blanc pur pour une lisibilité maximale sur fond sombre */
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quote-source {
+            display: block;
+            margin-top: 12px;
+            font-size: 0.9rem;
+            color: var(--accent-pink);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.9;
+        }
+
+        /* Liste à puces introductive */
+        ul.reasons-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            /* Fond sombre également ici */
+            background: rgba(10, 8, 20, 0.6);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        ul.reasons-list li {
+            position: relative;
+            padding-left: 30px;
+            font-size: 1.1rem;
+            color: #fff;
+            font-weight: 500;
+        }
+
+        ul.reasons-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-pink);
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container { padding: 30px 20px; }
+            h1 { font-size: 32px; }
+            .glass-panel, .intro-box { padding: 24px; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="ambient-glow"></div>
+
+    <div class="container">
+        
+        <header>
+            <h1>Pourquoi la démarche NIRD ?</h1>
+        </header>
+
+        <section class="intro-box">
+            <p style="font-size: 1.25rem; font-weight: 500; color: #fff;">
+                Parce que <strong>c’est le bon moment</strong>. Ou pour le dire de manière plus alarmiste : parce que c’est maintenant ou jamais !
+            </p>
+            <p>
+                La <strong>démarche NIRD</strong> est un projet très <strong>ambitieux</strong> car non seulement elle souhaite voir à terme une majorité d’écoles, collèges et lycées équipés majoritairement en <strong>Linux</strong>, mais elle souhaite aussi et surtout s’intégrer pleinement dans la <strong>stratégie numérique et écologique</strong> des établissements scolaires.
+            </p>
+        </section>
+
+        <section class="glass-panel">
+            <p>
+                Or la vente liée et le poids des habitudes rendent difficiles les migrations d’un système d’exploitation propriétaire (comme Windows) vers un système d’exploitation libre, a fortiori lorsque la collectivité n’a pas envisagé d’accueillir cette diversité. De plus Linux existe depuis plus de 30 ans. Il y a toujours eu ça et là, des salles informatiques sous Linux maintenues par des profs <em>geeks</em> experts et passionnés. Mais cela n’a jamais réussi à faire système.
+            </p>
+            <p>
+                Enfin la démarche démarre sans moyen et sans reconnaissance officielle. C’est une initiative <em>de terrain</em> motivée par le sentiment d’urgence et la conviction que cela sera bénéfique pour les élèves et la mission de service public d’éducation.
+            </p>
+
+            <p style="margin-top: 40px; margin-bottom: 20px; color: #fff; font-size: 1.2rem; font-weight:bold;">
+                Et pourtant voici quelques arguments qui nous rendent optimistes :
+            </p>
+
+            <ul class="reasons-list">
+                <li>L’institution et le politique nous le demandent, comme vous pouvez le constater avec les références ci-dessous.</li>
+            </ul>
+
+            <p style="margin-bottom:0;">
+                La démarche NIRD est parfaitement alignée avec de nombreux <strong>documents</strong> et <strong>recommandations</strong> officielles. Ces <strong>références</strong> peuvent vous aider à convaincre votre établissement scolaire et sa collectivité si vous voulez rejoindre notre mouvement.
+            </p>
+        </section>
+
+        <section>
+            <h2 class="quotes-title">📜 Les textes de référence</h2>
+            
+            <div class="quote-card">
+                <blockquote>
+                    « Les élèves utilisent un système d’exploitation libre. Les différences entre systèmes d’exploitation libres et propriétaires sont évoquées. »
+                </blockquote>
+                <span class="quote-source">Source : Eduscol, 2019</span>
+            </div>
+
+            <div class="quote-card">
+                <blockquote>
+                    « Le numérique permet de développer l’aisance des enfants et des élèves [...] en s’appuyant sur des outils libres et souverains quand ils existent. »
+                </blockquote>
+                <span class="quote-source">Source : MEN, 2023</span>
+            </div>
+
+            <div class="quote-card">
+                <blockquote>
+                    « La doctrine technique du numérique pour l’éducation est au service d’un numérique responsable et souverain [...] Les services d’infrastructures numériques choisis [...] permettent d’intégrer des machines utilisant les différents systèmes d’exploitation de façon à servir les objectifs pédagogiques et la neutralité technologique. »
+                </blockquote>
+                <span class="quote-source">Source : MEN, 2025</span>
+            </div>
+
+            <div class="quote-card">
+                <blockquote>
+                    « Cet équipement doit être adaptable pédagogiquement, connecté, sécurisé et éco-responsable. Des matériels reconditionnés avec un système d’exploitation libre et frugal en CPU et mémoire sont une possibilité. »
+                </blockquote>
+                <span class="quote-source">Source : Eduscol, 2025</span>
+            </div>
+
+            <div class="quote-card">
+                <blockquote>
+                    « L’allongement de la durée de vie des terminaux en développant davantage le reconditionnement et la réparation des équipements est un axe majeur de travail, tout comme la sensibilisation des consommateurs à ces enjeux. »
+                </blockquote>
+                <span class="quote-source">Source : Eduscol, 2023</span>
+            </div>
+
+            <div class="quote-card">
+                <blockquote>
+                    « La culture des communs numériques favorise la co-création et le partage des ressources pérennes et accessibles que la communauté scolaire peut librement utiliser et modifier. »
+                </blockquote>
+                <span class="quote-source">Source : Eduscol, 2024</span>
+            </div>
+
+            <div class="quote-card">
+                <blockquote>
+                    « Ils participent d’un numérique souverain en faisant le choix d’utiliser et aussi de contribuer aux logiciels libres [...] La mutualisation et l’amélioration de l’existant encouragent également le recyclage et un usage sobre et responsable du numérique. »
+                </blockquote>
+                <span class="quote-source">Source : Eduscol, 2025</span>
+            </div>
+
+            <div class="quote-card">
+                <blockquote>
+                    « Les avantages sont ainsi nombreux comme les coûts réduits, la flexibilité dans l’usage, le risque cyber plus faible, la durabilité et la pérennité dans les mises à jour permettant de réduire l’obsolescence logicielle (par exemple, la fin du support de Windows 10 en octobre 2025 va rendre obsolète des millions d’ordinateurs)... »
+                </blockquote>
+                <span class="quote-source">Source : ADEME, 2025</span>
+            </div>
+
+            <div class="quote-card">
+                <blockquote>
+                    « Le décret du 12 avril 2023 fixe des objectifs de 50 % de biens orientés vers le réemploi et la réutilisation en 2025. »
+                </blockquote>
+                <span class="quote-source">Source : Loi AGEC, 2023</span>
+            </div>
+
+            <div class="quote-card">
+                <blockquote>
+                    « Le Conseil éducation de la Commission européenne recommande aux États membres [...] de promouvoir l’utilisation de solutions open source, à contenu ouvert ou à données ouvertes et de communs numériques en général... »
+                </blockquote>
+                <span class="quote-source">Source : Commission européenne, 2023</span>
+            </div>
+
+            <div class="quote-card">
+                <blockquote>
+                    « Encourager les gouvernements [...] à adopter des cadres réglementaires favorisant la mise à disposition sous licence ouverte des matériels d’éducation et de recherche financés par des fonds publics. »
+                </blockquote>
+                <span class="quote-source">Source : Unesco, 2019</span>
+            </div>
+
+        </section>
+
+    </div>
+
+</body>
+</html>

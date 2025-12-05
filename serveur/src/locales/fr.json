@@ -1,0 +1,39 @@
+{
+  "site": {
+    "title": "DIRD"
+  },
+  "nav": {
+    "home": "Accueil",
+    "softwares": "Logiciels",
+    "users": "Utilisateurs"
+  },
+  "home": {
+    "welcome": "Bienvenue sur le site de la Démarche NIRD",
+    "description": "Contenu spécifique à la page d'accueil.",
+    "api_test_button": "Tester API",
+    "click_to_test": "Cliquez pour tester"
+  },
+  "api": {
+    "ready": "API prête !",
+    "status_ok": "API DIRD OK"
+  },
+  "footer": {
+    "about_title": "À propos du projet DIRD",
+    "about_text": "Ce site est à l'initiative d'un collectif enseignant et est publié sous licence libre.",
+    "links_title": "Liens rapides",
+    "legal_title": "Informations légales",
+    "host_info": "Hébergé sur la Forge des communs numériques éducatifs",
+    "copyright": "© 2025 DIRD"
+  }
+  ,
+  "popular": {
+    "title": "Applications les plus populaires",
+    "subtitle": "Les outils éducatifs les plus utilisés par la communauté NIRD",
+    "no_apps": "Aucune application populaire pour le moment",
+    "view_all": "Voir toutes les applications"
+  }
+}
+
+
+
+

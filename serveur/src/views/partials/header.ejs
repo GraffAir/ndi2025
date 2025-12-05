@@ -1,0 +1,75 @@
+<header class="hero-section">
+  <div class="hero-container">
+    <!-- Logo -->
+    <a href="/" class="hero-logo">
+      <img
+        src="https://nird.forge.apps.education.fr/img/logo+text206px.png"
+        alt="NIRD - Logo"
+        loading="lazy"
+      />
+    </a>
+
+    <!-- Switchers (top right) -->
+    <div class="hero-controls">
+      <!-- Language Switcher -->
+      <div class="language-switcher">
+        <button class="control-btn" id="langBtn" aria-label="Changer de langue">
+          <span class="flag">🇫🇷</span>
+        </button>
+        <div class="lang-dropdown" id="langDropdown">
+          <a href="?lng=fr" class="lang-option" data-lang="fr">🇫🇷 Français</a>
+          <a href="?lng=en" class="lang-option" data-lang="en">🇬🇧 English</a>
+          <a href="?lng=es" class="lang-option" data-lang="es">🇪🇸 Español</a>
+        </div>
+      </div>
+
+      <!-- Dark Mode Toggle -->
+      <button
+        class="control-btn"
+        id="themeToggle"
+        aria-label="Basculer mode sombre"
+      >
+        <span class="theme-icon">🌙</span>
+      </button>
+    </div>
+
+    <h1 class="hero-title">Démarche NIRD</h1>
+    <p class="hero-subtitle">Ressources Éducatives Collaboratives</p>
+
+    <form class="hero-search" action="/search" method="GET" role="search">
+      <input
+        type="search"
+        name="q"
+        placeholder="Rechercher une ressource, un outil..."
+        aria-label="Rechercher"
+      />
+      <button type="submit" class="search-btn">Rechercher</button>
+    </form>
+
+    <div class="hero-badges">
+      <a href="/" class="hero-badge">🐝 Présentation</a>
+      <a href="/demarche" class="hero-badge">🚸 Démarche</a>
+      <a href="/pilotes" class="hero-badge">🏫 Pilotes</a>
+      <a href="/quiz" class="hero-badge">🎯 Quiz</a>
+      <a href="/outils" class="hero-badge">🧰 Boîte à outils</a>
+      <a href="/reconditionnement" class="hero-badge">♻️ Reconditionnement</a>
+      <a href="/collectivites" class="hero-badge">🏛️ Collectivités</a>
+      <a href="/pourquoi" class="hero-badge">❓ Pourquoi</a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-number">1.2K</span>
+        <span class="stat-label">Enseignants</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">847</span>
+        <span class="stat-label">Ressources</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">42</span>
+        <span class="stat-label">Collectivités</span>
+      </div>
+    </div>
+  </div>
+</header>
