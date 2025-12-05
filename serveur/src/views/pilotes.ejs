@@ -1,134 +1,356 @@
-<div style="margin-bottom: 40px;">
-    <h1 style="font-size: 42px; font-weight: 900; margin-bottom: 10px;">
-        <span class="gradient-text">Établissements Pilotes</span>
-    </h1>
-    <p style="color: var(--text-muted);">Session expérimentale 2025/2026</p>
-</div>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Établissements Pilotes - NIRD</title>
+    <style>
+        /* --- DESIGN SYSTEM "NUIT PROFONDE" --- */
+        :root {
+            --primary-violet: #764ba2;
+            --secondary-blue: #667eea;
+            --accent-pink: #f093fb;
+            --bg-dark: #05040a;
+            --text-main: #f3f4f6;
+            --text-muted: #d1d5db;
+            
+            /* Styles des blocs en verre */
+            --glass-bg: rgba(30, 20, 60, 0.6);
+            --glass-border: rgba(139, 92, 246, 0.2);
+            --card-hover-border: rgba(240, 147, 251, 0.5);
+            
+            /* Boutons */
+            --btn-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
 
-<section class="intro-box">
-    <p>De l'école au lycée, voici la liste des premiers <strong>établissements scolaires</strong> qui ont décidé de
-        s'engager de manière <strong>expérimentale</strong> dans la démarche NIRD en <strong>2025/2026</strong>, en
-        menant notamment des actions de <strong>reconditionnement</strong>.</p>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    <p style="margin-bottom: 0;">Si vous êtes intéressé(e) par <strong>y inscrire votre propre établissement</strong>,
-        vous pouvez nous rejoindre sur le <a href="https://edurl.fr/tchap-laforgeedu-nird" target="_blank">forum Tchap
-            de la démarche</a>. Vous y trouverez aides et conseils, en échangeant directement avec les contacts des
-        projets ci-dessous.</p>
-</section>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 80px;
+        }
 
-<section class="glass-panel">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px;">
-        <h2 style="margin:0;">📍 La carte des pilotes</h2>
-        <div class="map-controls">
-            <span style="font-size: 0.85rem; color: var(--text-muted); margin-right: 10px;">Leaflet | ©
-                OpenStreetMap</span>
-            <a href="https://nird.forge.apps.education.fr/pilotes/#" title="Zoomer">[+]</a>
-            <a href="https://nird.forge.apps.education.fr/pilotes/#" title="Dézoomer">[−]</a>
+        /* Arrière-plan d'ambiance */
+        .ambient-glow {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background:
+                radial-gradient(circle at 10% 20%, rgba(118, 75, 162, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(102, 126, 234, 0.05) 0%, transparent 40%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        /* --- TYPOGRAPHIE --- */
+        h1 {
+            font-size: clamp(32px, 5vw, 42px);
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 26px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 24px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #ffffff 40%, var(--accent-pink) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        a { color: var(--accent-pink); text-decoration: none; transition: all 0.2s; }
+        a:hover { color: #fff; }
+
+        p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 1rem; }
+        strong { color: #fff; }
+
+        /* --- BLOCS DE CONTENU --- */
+
+        /* Intro Box */
+        .intro-box {
+            background: rgba(40, 30, 60, 0.5);
+            border-left: 4px solid var(--accent-pink);
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Glass Panel (Conteneur Map & Liste) */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 32px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Map Placeholder */
+        .map-placeholder {
+            height: 400px;
+            background: linear-gradient(135deg, #151020 0%, #0a0810 100%);
+            border: 2px dashed rgba(139, 92, 246, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: var(--text-muted);
+            margin-top: 20px;
+        }
+
+        .map-controls a {
+            font-family: monospace;
+            margin-left: 8px;
+            font-size: 1.1rem;
+        }
+
+        /* --- GRILLE ÉCOLES --- */
+        .school-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .school-card {
+            display: block;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .school-card:hover {
+            background: rgba(255, 255, 255, 0.07);
+            transform: translateY(-4px);
+            border-color: var(--accent-pink);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
+
+        .school-name {
+            display: block;
+            font-weight: 700;
+            color: #fff;
+            font-size: 1.1rem;
+            margin-bottom: 6px;
+        }
+
+        .school-meta {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .school-code {
+            display: inline-block;
+            background: rgba(118, 75, 162, 0.3);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: #d8b4fe;
+        }
+
+        /* Pagination */
+        .pagination-info {
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* --- CTA SECTION --- */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            border: 1px solid var(--glass-border);
+            margin-top: 60px;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            padding: 16px 32px;
+            background: var(--btn-gradient);
+            color: white !important;
+            font-weight: 700;
+            font-size: 18px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(118, 75, 162, 0.4);
+            transition: all 0.3s ease;
+            text-decoration: none !important;
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(118, 75, 162, 0.6);
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .container { padding: 30px 20px; }
+            h1 { font-size: 32px !important; }
+            .glass-panel { padding: 20px; }
+            .school-grid { grid-template-columns: 1fr; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="ambient-glow"></div>
+
+    <div class="container">
+        
+        <div style="margin-bottom: 40px; text-align: center;">
+            <h1 style="font-size: 42px; font-weight: 900; margin-bottom: 10px;">
+                <span class="gradient-text">Établissements Pilotes</span>
+            </h1>
+            <p style="color: var(--text-muted);">Session expérimentale 2025/2026</p>
         </div>
-    </div>
 
-    <div class="map-placeholder">
-        <p style="font-size: 1.2rem; margin-bottom: 10px;">🗺️ Carte interactive Leaflet</p>
-        <p style="color: var(--text-muted);">
-            (<%= (typeof total !=='undefined' ) ? total : 18 %> établissements)
-                <br>
-                <a href="/api/pilotes/map" style="font-size: 0.9rem; display:inline-block; margin-top:8px;">📡 API
-                    JSON</a>
-        </p>
-    </div>
-</section>
+        <section class="intro-box">
+            <p>De l'école au lycée, voici la liste des premiers <strong>établissements scolaires</strong> qui ont décidé de
+                s'engager de manière <strong>expérimentale</strong> dans la démarche NIRD en <strong>2025/2026</strong>, en
+                menant notamment des actions de <strong>reconditionnement</strong>.</p>
 
-<section class="glass-panel">
-    <h2>📋 La liste des pilotes (<%= (typeof total !=='undefined' ) ? total : ((typeof items !=='undefined' ) ?
-            items.length : 18) %>)</h2>
+            <p style="margin-bottom: 0;">Si vous êtes intéressé(e) par <strong>y inscrire votre propre établissement</strong>,
+                vous pouvez nous rejoindre sur le <a href="https://edurl.fr/tchap-laforgeedu-nird" target="_blank">forum Tchap
+                    de la démarche</a>. Vous y trouverez aides et conseils, en échangeant directement avec les contacts des
+                projets ci-dessous.</p>
+        </section>
 
-    <% if (typeof items !=='undefined' && items && items.length> 0) { %>
-        <div class="school-grid">
-            <% items.forEach(function(pilote) { %>
-                <a href="<%= pilote.url || `/pilotes/${pilote.code}` %>" target="_blank" class="school-card">
-                    <span class="school-name">
-                        <%= pilote.nom %>
-                    </span>
-                    <% if (pilote.type || pilote.academie) { %>
-                        <span class="school-meta">
-                            <%= pilote.type || '' %>
-                                <%= pilote.academie ? ' - ' + pilote.academie : '' %>
-                        </span>
-                        <% } %>
+        <section class="glass-panel">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px;">
+                <h2 style="margin:0;">📍 La carte des pilotes</h2>
+                <div class="map-controls">
+                    <span style="font-size: 0.85rem; color: var(--text-muted); margin-right: 10px;">Leaflet | © OpenStreetMap</span>
+                    <a href="https://nird.forge.apps.education.fr/pilotes/#" title="Zoomer">[+]</a>
+                    <a href="https://nird.forge.apps.education.fr/pilotes/#" title="Dézoomer">[−]</a>
+                </div>
+            </div>
+
+            <div class="map-placeholder">
+                <p style="font-size: 1.2rem; margin-bottom: 10px;">🗺️ Carte interactive Leaflet</p>
+                <p style="color: var(--text-muted);">
+                    (<%= (typeof total !=='undefined' ) ? total : 18 %> établissements)
+                    <br>
+                    <a href="/api/pilotes/map" style="font-size: 0.9rem; display:inline-block; margin-top:8px;">📡 API JSON</a>
+                </p>
+            </div>
+        </section>
+
+        <section class="glass-panel">
+            <h2>📋 La liste des pilotes (<%= (typeof total !=='undefined' ) ? total : ((typeof items !=='undefined' ) ? items.length : 18) %>)</h2>
+
+            <% if (typeof items !=='undefined' && items && items.length > 0) { %>
+                <div class="school-grid">
+                    <% items.forEach(function(pilote) { %>
+                        <a href="<%= pilote.url || `/pilotes/${pilote.code}` %>" target="_blank" class="school-card">
+                            <span class="school-name">
+                                <%= pilote.nom %>
+                            </span>
+                            <% if (pilote.type || pilote.academie) { %>
+                                <span class="school-meta">
+                                    <%= pilote.type || '' %>
+                                    <%= pilote.academie ? ' - ' + pilote.academie : '' %>
+                                </span>
+                            <% } %>
                             <% if (pilote.code) { %>
                                 <span class="school-code">
                                     <%= pilote.code %>
                                 </span>
-                                <% } %>
-                </a>
-                <% }); %>
-        </div>
-        <% } else { %>
-            <div class="school-grid">
-                <a href="https://nird.forge.apps.education.fr/pilotes/0810005r.html" target="_blank"
-                    class="school-card">
-                    <span class="school-name">Cité scolaire Bellevue</span>
-                    <span class="school-code">0810005R</span>
-                </a>
-                <a href="https://nird.forge.apps.education.fr/pilotes/0290033d.html" target="_blank"
-                    class="school-card">
-                    <span class="school-name">Collège Coat Mez</span>
-                    <span class="school-code">0290033D</span>
-                </a>
-                <a href="https://nird.forge.apps.education.fr/pilotes/0620099w.html" target="_blank"
-                    class="school-card">
-                    <span class="school-name">Collège des 7 vallées</span>
-                    <span class="school-code">0620099W</span>
-                </a>
-                <a href="https://nird.forge.apps.education.fr/pilotes/0550023b.html" target="_blank"
-                    class="school-card">
-                    <span class="school-name">Collège Les Cuvelles</span>
-                    <span class="school-code">0550023B</span>
-                </a>
-                <a href="https://nird.forge.apps.education.fr/pilotes/9840234g.html" target="_blank"
-                    class="school-card">
-                    <span class="school-name">Collège Uporu</span>
-                    <span class="school-code">9840234G</span>
-                </a>
-                <a href="https://nird.forge.apps.education.fr/pilotes/0620056z.html" target="_blank" class="school-card"
-                    style="border-color: var(--accent-pink);">
-                    <span class="school-name">Lycée Carnot</span>
-                    <span class="school-meta">Pilote historique</span>
-                    <span class="school-code">0620056Z</span>
-                </a>
-                <a href="https://nird.forge.apps.education.fr/pilotes/0460509d.html" target="_blank"
-                    class="school-card">
-                    <span class="school-name">École élém. Louis Barrié</span>
-                    <span class="school-code">0460509D</span>
-                </a>
-                <a href="https://nird.forge.apps.education.fr/pilotes/0260015a.html" target="_blank"
-                    class="school-card">
-                    <span class="school-name">Lycée Alain Borne</span>
-                    <span class="school-code">0260015A</span>
-                </a>
-                <a href="https://nird.forge.apps.education.fr/pilotes/0690037r.html" target="_blank"
-                    class="school-card">
-                    <span class="school-name">Lycée La Martinière Diderot</span>
-                    <span class="school-code">0690037R</span>
-                </a>
-            </div>
+                            <% } %>
+                        </a>
+                    <% }); %>
+                </div>
+            <% } else { %>
+                <div class="school-grid">
+                    <a href="https://nird.forge.apps.education.fr/pilotes/0810005r.html" target="_blank" class="school-card">
+                        <span class="school-name">Cité scolaire Bellevue</span>
+                        <span class="school-code">0810005R</span>
+                    </a>
+                    <a href="https://nird.forge.apps.education.fr/pilotes/0290033d.html" target="_blank" class="school-card">
+                        <span class="school-name">Collège Coat Mez</span>
+                        <span class="school-code">0290033D</span>
+                    </a>
+                    <a href="https://nird.forge.apps.education.fr/pilotes/0620099w.html" target="_blank" class="school-card">
+                        <span class="school-name">Collège des 7 vallées</span>
+                        <span class="school-code">0620099W</span>
+                    </a>
+                    <a href="https://nird.forge.apps.education.fr/pilotes/0550023b.html" target="_blank" class="school-card">
+                        <span class="school-name">Collège Les Cuvelles</span>
+                        <span class="school-code">0550023B</span>
+                    </a>
+                    <a href="https://nird.forge.apps.education.fr/pilotes/9840234g.html" target="_blank" class="school-card">
+                        <span class="school-name">Collège Uporu</span>
+                        <span class="school-code">9840234G</span>
+                    </a>
+                    <a href="https://nird.forge.apps.education.fr/pilotes/0620056z.html" target="_blank" class="school-card" style="border-color: var(--accent-pink);">
+                        <span class="school-name">Lycée Carnot</span>
+                        <span class="school-meta">Pilote historique</span>
+                        <span class="school-code">0620056Z</span>
+                    </a>
+                    <a href="https://nird.forge.apps.education.fr/pilotes/0460509d.html" target="_blank" class="school-card">
+                        <span class="school-name">École élém. Louis Barrié</span>
+                        <span class="school-code">0460509D</span>
+                    </a>
+                    <a href="https://nird.forge.apps.education.fr/pilotes/0260015a.html" target="_blank" class="school-card">
+                        <span class="school-name">Lycée Alain Borne</span>
+                        <span class="school-code">0260015A</span>
+                    </a>
+                    <a href="https://nird.forge.apps.education.fr/pilotes/0690037r.html" target="_blank" class="school-card">
+                        <span class="school-name">Lycée La Martinière Diderot</span>
+                        <span class="school-code">0690037R</span>
+                    </a>
+                </div>
             <% } %>
 
-                <% if (typeof pagination !=='undefined' && pagination) { %>
-                    <div class="pagination-info">
-                        Page <%= pagination.current %> sur <%= pagination.pages %>
-                                <% if (typeof total !=='undefined' ) { %>(Total: <%= total %>)<% } %>
-                    </div>
-                    <% } %>
-</section>
+            <% if (typeof pagination !=='undefined' && pagination) { %>
+                <div class="pagination-info">
+                    Page <%= pagination.current %> sur <%= pagination.pages %>
+                    <% if (typeof total !=='undefined' ) { %>(Total: <%= total %>)<% } %>
+                </div>
+            <% } %>
+        </section>
 
-<section class="cta-section">
-    <h2 style="justify-content: center;">🏫 Devenez pilote NIRD !</h2>
-    <p>Inscrivez votre établissement pour la session 2025/2026 et bénéficiez de l'accompagnement de la communauté.</p>
+        <section class="cta-section">
+            <h2 style="justify-content: center; border:none; margin-top:0;">🏫 Devenez pilote NIRD !</h2>
+            <p>Inscrivez votre établissement pour la session 2025/2026 et bénéficiez de l'accompagnement de la communauté.</p>
 
-    <a href="https://edurl.fr/tchap-laforgeedu-nird" target="_blank" class="cta-btn">
-        🚀 Rejoindre le forum Tchap
-    </a>
-</section>
+            <a href="https://edurl.fr/tchap-laforgeedu-nird" target="_blank" class="cta-btn">
+                🚀 Rejoindre le forum Tchap
+            </a>
+        </section>
 
-</div>
+    </div>
+
+</body>
+</html>
