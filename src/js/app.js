@@ -30,6 +30,10 @@ function gererChoix() {
     });
 }
 
+function afficherResultats(){
+
+}
+
 function naviguer(){
     console.log("On navigue vers : "+page);
     const role = sessionStorage.getItem("quizRole");
@@ -74,6 +78,9 @@ function naviguer(){
             break;
         case "quiz/navigateur":
             window.location.href = "template.html?page=quiz/recherche";
+            break;
+        case "quiz/recherche":
+            window.location.href = "template.html?page=quiz/resultats";
             break;
         default:
             window.location.href = "template.html?page=quiz/debut";
