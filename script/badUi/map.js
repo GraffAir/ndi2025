@@ -110,7 +110,7 @@ async function drawGrid() {
                         L.marker([center.lat, center.lon], {
                             icon: L.divIcon({
                                 className: 'grid-label',
-                                html: `<b style="background:white; padding:2px;">${char}</b>`, // Petit style pour lisibilité
+                                html: `<span style="padding:2px;">${char}</span>`, // Petit style pour lisibilité
                                 iconSize: [20, 20],
                                 iconAnchor: [10, 10] // Centrage parfait du texte
                             }),
