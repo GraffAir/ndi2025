@@ -25,7 +25,7 @@ class PourquoiController extends GenericController {
                 navigation: {
                     collectivites: '/collectivites',
                     reconditionnement: '/reconditionnement',
-                    tools: '/tools',
+                    outils: '/outils',
                     demarche: '/demarche'
                 }
             });

@@ -5,6 +5,10 @@ const path = require('path');
 const expressLayouts = require('express-ejs-layouts');
 const indexRouter = require('./routes/index');
 
+const i18next = require('i18next');
+const i18nextBackend = require('i18next-fs-backend');
+const i18nextMiddleware = require('i18next-http-middleware');
+
 const app = express();
 const PORT = 3000;
 
@@ -27,10 +31,12 @@ i18next
   .use(i18nextMiddleware.LanguageDetector)
   .init({
     fallbackLng: 'fr',
-    supportedLngs: ['fr', 'en', 'es'],
-    preload: ['fr', 'en', 'es'],
+    // Only preload languages for which we have files
+    supportedLngs: ['fr', 'en'],
+    preload: ['fr', 'en'],
     backend: {
-      loadPath: path.join(__dirname, '..', 'public', 'locales', '{{lng}}', '{{ns}}.json')
+      // Load translation files from src/locales (we created fr.json/en.json there)
+      loadPath: path.join(__dirname, 'locales', '{{lng}}.json')
     },
     detection: {
       order: ['querystring', 'cookie', 'header'],
@@ -43,9 +49,15 @@ i18next
     }
   }, (err, t) => {
     if (err) {
-      console.error('❌ [i18n] Erreur initialisation:', err.message);
+      // err may not be an Error object; print it safely
+      try {
+        console.error('❌ [i18n] Erreur initialisation:', err && err.message ? err.message : JSON.stringify(err));
+      } catch (e) {
+        console.error('❌ [i18n] Erreur initialisation (non-serializable):', err);
+      }
+      if (err && err.stack) console.error(err.stack);
     } else {
-      console.log('✅ [i18n] Langues chargées: fr, en, es');
+      console.log('✅ [i18n] Langues chargées: fr, en');
     }
   });
 
@@ -73,6 +85,19 @@ app.use((req, res, next) => {
 });
 
 console.log('✅ [i18n] Middleware actif - t() et __() disponibles');
+
+// Option to temporarily disable translations globally.
+// Set environment variable I18N_DISABLED=1 to turn off translations (useful for debugging).
+if (process.env.I18N_DISABLED === '1') {
+  console.log('⚠️ [i18n] Translations are DISABLED via I18N_DISABLED=1');
+  app.use((req, res, next) => {
+    // override translation helpers with no-op / identity functions
+    res.locals.t = (key) => (typeof key === 'string' ? key : '');
+    res.locals.__ = (key, defaultValue = '') => (defaultValue || key);
+    res.locals.i18n = { language: req.query.lng || 'fr' };
+    next();
+  });
+}
 
 // 🔥 2. PARSING MIDDLEWARE
 console.log('🔐 [BOOT] JSON + URLencoded + CORS');
