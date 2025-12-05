@@ -67,6 +67,9 @@ function naviguer(){
             window.location.href = "template.html?page=quiz/bureautique";
             break;
         case "quiz/bureautique":
+            window.location.href = "template.html?page=quiz/"+ (role === "eleve" ? "eleve-implication" : "navigateur");
+            break;
+        case "quiz/eleve-implication":
             window.location.href = "template.html?page=quiz/navigateur";
             break;
         default:
