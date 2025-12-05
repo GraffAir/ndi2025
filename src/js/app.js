@@ -39,10 +39,20 @@ function naviguer(){
                 case "parent":
                     window.location.href = "template.html?page=quiz/parent-eleve";
                     break;
+                case "personnel":
+                    window.location.href = "template.html?page=quiz/systeme-informatique";
+                    break;
                 default:
                     window.location.href = "template.html?page=quiz/systeme-exploitation";
             }
             break;
+        case "quiz/parent-eleve":
+            window.location.href = "template.html?page=quiz/systeme-exploitation";
+            break;
+        case "quiz/systeme-informatique":
+            if (sessionStorage.getItem("quizTechnique") == "oui"){
+                window.location.href = "template.html?page=quiz/pare-feu";
+            }
         default:
             window.location.href = "template.html?page=quiz/debut";
     }
