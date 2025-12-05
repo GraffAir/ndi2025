@@ -1,12 +1,21 @@
 /* ✅ SEULEMENT classes .hero-* - Pas de body ou * */
 
+/* Variables locales pour la section hero (à consolider plus tard) */
+:root {
+    --hero-padding-desktop: 60px 40px;
+    --hero-padding-mobile: 24px 20px;
+    --hero-shadow: 0 12px 40px rgba(0, 0, 0, 0.24);
+    --hero-blur: 12px;
+    --hero-accent-weak: rgba(255, 255, 255, 0.08);
+}
+
 .hero-section {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-    padding: 60px 40px;
+    padding: var(--hero-padding-desktop);
     text-align: center;
     position: relative;
     overflow: visible;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--hero-shadow);
 }
 
 .hero-section::before {
@@ -17,11 +26,13 @@
     right: 0;
     bottom: 0;
     background:
-        radial-gradient(circle at 15% 85%, rgba(147, 112, 219, 0.4) 0%, transparent 40%),
-        radial-gradient(circle at 85% 15%, rgba(255, 119, 198, 0.4) 0%, transparent 40%),
-        radial-gradient(circle at 50% 50%, rgba(120, 219, 255, 0.3) 0%, transparent 50%),
-        radial-gradient(circle at 30% 30%, rgba(255, 200, 124, 0.2) 0%, transparent 35%);
-    animation: floatBg 25s ease-in-out infinite;
+        radial-gradient(circle at 15% 85%, rgba(147, 112, 219, 0.35) 0%, transparent 40%),
+        radial-gradient(circle at 85% 15%, rgba(255, 119, 198, 0.35) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(120, 219, 255, 0.28) 0%, transparent 50%),
+        radial-gradient(circle at 30% 30%, rgba(255, 200, 124, 0.18) 0%, transparent 35%);
+    /* animation kept but slightly faster and GPU friendly */
+    will-change: transform, opacity;
+    animation: floatBg 18s ease-in-out infinite;
     z-index: 0;
 }
 
@@ -59,8 +70,8 @@
     left: 24px;
     max-width: 160px;
     height: auto;
-    filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.35));
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.28));
+    transition: transform 0.32s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.32s ease;
     z-index: 3;
 }
 
@@ -71,8 +82,8 @@
 }
 
 .hero-logo:hover {
-    transform: scale(1.05) rotate(-2deg);
-    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.4));
+    transform: translateZ(0) scale(1.04) rotate(-1.5deg);
+    filter: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.33));
 }
 
 .hero-container {
@@ -89,16 +100,17 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
     font-weight: 900;
-    font-size: clamp(42px, 6vw, 72px);
+    font-size: clamp(2.25rem, 6vw, 4.5rem);
     margin: 0 0 8px 0;
     letter-spacing: -0.03em;
-    line-height: 1.1;
-    animation: titleGlow 3s ease-in-out infinite;
+    line-height: 1.05;
+    /* subtle glow with longer duration to reduce GPU churn */
+    animation: titleGlow 6s ease-in-out infinite;
 }
 
 @keyframes titleGlow {
-    0%, 100% { filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3)); }
-    50% { filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.5)); }
+    0%, 100% { filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.22)); }
+    50% { filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.32)); }
 }
 
 .hero-subtitle {
@@ -123,20 +135,20 @@
 .hero-search input[type="search"] {
     flex: 1;
     background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(20px);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 16px;
-    padding: 18px 24px;
+    backdrop-filter: blur(var(--hero-blur));
+    border: 2px solid rgba(255, 255, 255, 0.28);
+    border-radius: 14px;
+    padding: 14px 20px;
     font-size: 16px;
     color: #1a1a1a;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(255, 255, 255, 0.5);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12), inset 0 1px 3px rgba(255, 255, 255, 0.45);
     outline: none;
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
 }
 
 .hero-search input:focus {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25), inset 0 2px 4px rgba(255, 255, 255, 0.5);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18), inset 0 1px 3px rgba(255, 255, 255, 0.45);
     border-color: rgba(255, 255, 255, 0.6);
     background: rgba(255, 255, 255, 1);
 }
@@ -146,17 +158,17 @@
 }
 
 .hero-search .search-btn {
-    padding: 18px 36px;
-    border-radius: 16px;
+    padding: 14px 28px;
+    border-radius: 14px;
     border: none;
     background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
     color: #ffffff;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 15px;
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: transform 0.28s ease, box-shadow 0.28s ease, background 0.28s ease;
     white-space: nowrap;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.24);
     position: relative;
     overflow: hidden;
 }
@@ -168,8 +180,8 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.6s;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+    transition: left 0.5s ease;
 }
 
 .hero-search .search-btn:hover::before {
@@ -177,8 +189,8 @@
 }
 
 .hero-search .search-btn:hover {
-    transform: translateY(-4px) scale(1.05);
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.32);
     background: linear-gradient(135deg, #2d2d2d 0%, #3d3d3d 100%);
 }
 
@@ -192,14 +204,14 @@
 }
 
 .stat {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08));
-    backdrop-filter: blur(20px);
-    border: 2px solid rgba(255, 255, 255, 0.25);
-    border-radius: 28px;
-    padding: 20px 24px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.07));
+    backdrop-filter: blur(14px);
+    border: 2px solid rgba(255, 255, 255, 0.22);
+    border-radius: 20px;
+    padding: 16px 20px;
     text-align: center;
-    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    min-width: 120px;
+    transition: transform 0.36s ease, box-shadow 0.36s ease, background 0.36s ease;
+    min-width: 110px;
     position: relative;
     overflow: hidden;
 }
@@ -221,10 +233,10 @@
 }
 
 .stat:hover {
-    transform: translateY(-12px) scale(1.05);
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.15));
-    border-color: rgba(255, 255, 255, 0.4);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    transform: translateY(-8px) scale(1.02);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.12));
+    border-color: rgba(255, 255, 255, 0.34);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.26);
 }
 
 .stat-number {
@@ -255,17 +267,17 @@
 }
 
 .hero-badge {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08));
-    backdrop-filter: blur(16px);
-    border: 2px solid rgba(255, 255, 255, 0.25);
-    border-radius: 50px;
-    padding: 10px 20px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.07));
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+    padding: 8px 16px;
     color: rgba(255, 255, 255, 0.98);
     font-weight: 600;
     font-size: 13px;
     text-decoration: none;
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    transition: transform 0.28s ease, box-shadow 0.28s ease, background 0.28s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
     white-space: nowrap;
 }
 
@@ -378,6 +390,30 @@
 .lang-option.active {
     background: rgba(102, 126, 234, 0.15);
     font-weight: 700;
+}
+/* Accessible focus states for hero interactive elements */
+.hero-search .search-btn:focus-visible,
+.control-btn:focus-visible,
+.hero-badge:focus-visible,
+.lang-option:focus-visible {
+    outline: 3px solid rgba(255, 255, 255, 0.32);
+    outline-offset: 3px;
+    border-radius: 10px;
+}
+
+/* Reduced motion preference: disable heavy animations and transitions */
+@media (prefers-reduced-motion: reduce) {
+    .hero-section::before,
+    .hero-section::after,
+    .hero-title,
+    .hero-logo,
+    .stat,
+    .hero-search .search-btn,
+    .hero-badge,
+    .control-btn {
+        animation: none !important;
+        transition: none !important;
+    }
 }
 
 /* Dark Mode Styles */
