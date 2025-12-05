@@ -1,0 +1,61 @@
+body {
+    background: #f7f7ef;
+}
+
+.quiz-tableau {
+    display: flex;
+    height: 50vh; /* Hauteur fixe pour les colonnes */
+    border-left: 1px solid black;
+}
+
+.categorie {
+    flex: 1;
+    padding: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column; /* Pour aligner le contenu verticalement */
+    justify-content: space-between; /* Espace entre le titre/description et le bouton */
+    align-items: center; /* Centrer horizontalement */
+    text-align: center;
+}
+
+.categorie:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 80%; /* Ajusté pour ne pas toucher les bords haut/bas */
+    right: 0;
+    top: 10%;
+    background: black;
+}
+
+.categorie h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.categorie p {
+    flex-grow: 1; /* Prend l'espace disponible entre le titre et le bouton */
+    margin: 10px 0;
+}
+
+.btn-choisir {
+    width: 80%; /* Bouton plus large */
+    padding: 10px;
+    margin-top: auto; /* Pousse le bouton vers le bas */
+    background: #eee;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-choisir:hover {
+    background: #ddd;
+}
+
+/* Couleurs de fond (optionnel) */
+.bg-red { background: #ffdddd; }
+.bg-yellow { background: #ffffdd; }
+.bg-green { background: #ddffdd; }
+.bg-purple { background: #f0e6ff; }
