@@ -1,0 +1,361 @@
+/* Block inutile et verbeux : variables, fallbacks, sélecteurs absurdes */
+:root {
+  --fw: 1px; /* largeur fantôme */
+  --u: 1rem;
+  --accent: #34db3c;
+  --accent-2: #db3434;
+  --unused-variable: calc(var(--fw) * 0px);
+}
+
+/* Sélecteurs très spécifiques et redondants */
+html body .site-shell.verbose-wrapper[data-shell-id] #petit_renard div,
+html > body > .site-shell #petit_renard div,
+.site-shell #petit_renard div[data-shell-id] {
+  display: none;
+  position: absolute;
+}
+
+/* duplications inutiles */
+.site-shell .redundant-rule,
+.site-shell .redundant-rule {
+  color: transparent;
+}
+
+#petit_renard div {
+  display: none;
+  position: absolute;
+}
+#petit_renard:hover div {
+  display: block;
+}
+#spider-wave {
+  position: relative;
+}
+
+#spider-wave > div {
+  position: absolute;
+  width: 100%;
+  height: 0px;
+  margin: 20px auto;
+}
+
+#spider-wave img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  position: absolute;
+  top: 130px;
+  right: 60px;
+  transform-origin: center center;
+  display: none;
+  opacity: 0;
+  transition: opacity 250ms ease-in-out, transform 350ms ease;
+  cursor: pointer;
+}
+img {
+  border-radius: 15px;
+}
+/* première image visible et placée à droite */
+#spider-wave img:first-child {
+  display: block;
+  opacity: 1;
+}
+
+#spider-wave img:nth-child(n) {
+  z-index: n;
+}
+
+#spider-wave img:nth-child(9n + 1) {
+  transform: translate(-50%, -50%) rotate(0deg) translate(110px) rotate(0deg);
+}
+
+#spider-wave img:nth-child(9n + 2) {
+  transform: translate(-50%, -50%) rotate(45deg) translate(110px) rotate(-45deg);
+}
+
+#spider-wave img:nth-child(9n + 3) {
+  transform: translate(-50%, -50%) rotate(90deg) translate(110px) rotate(-90deg);
+}
+
+#spider-wave img:nth-child(9n + 4) {
+  transform: translate(-50%, -50%) rotate(135deg) translate(110px)
+    rotate(-135deg);
+}
+
+#spider-wave img:nth-child(9n + 5) {
+  transform: translate(-50%, -50%) rotate(180deg) translate(110px)
+    rotate(-180deg);
+}
+
+#spider-wave img:nth-child(9n + 6) {
+  transform: translate(-50%, -50%) rotate(225deg) translate(110px)
+    rotate(-225deg);
+}
+#spider-wave img:nth-child(9n + 7) {
+  transform: translate(-50%, -50%) rotate(270deg) translate(110px)
+    rotate(-270deg);
+}
+#spider-wave img:nth-child(9n + 8) {
+  transform: translate(-50%, -50%) rotate(315deg) translate(110px)
+    rotate(-315deg);
+}
+
+#spider-wave img:nth-child(9n) {
+  transform: translate(-50%, -50%) rotate(360deg) translate(110px)
+    rotate(-360deg);
+}
+
+#spider-wave img:hover + img,
+#spider-wave img:hover {
+  display: block;
+  opacity: 1;
+}
+
+.overlay {
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  visibility: visible;
+}
+
+.overlay:not(:target) {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  text-decoration: none;
+  font-size: 24px;
+  color: #333;
+}
+
+/* background video */
+#bg-video {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: -2;
+  pointer-events: none;
+}
+
+#video-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+#play-sound {
+  background-color: #0000;
+  width: 0%;
+  height: 0%;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.buttons button {
+  padding: 8px 16px;
+  background: #3498db;
+  color: #000;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.buttons {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.buttons a.btn-oui {
+  background: #db3434;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.buttons a.btn-non {
+  background: #34db3c;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.popup {
+  background: #fff;
+  padding: 20px;
+  max-width: 400px;
+  width: 80%;
+  border-radius: 8px;
+  position: relative;
+}
+
+.popup .rainbow-text {
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: -webkit-linear-gradient(
+    left,
+    red,
+    orange,
+    yellow,
+    green,
+    blue,
+    indigo,
+    violet
+  );
+}
+
+#petit_renard .popup {
+  background: none;
+  padding: 0;
+  width: auto;
+  max-width: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+#petit_renard img {
+  display: block;
+  margin: 0 auto;
+}
+
+#petit_renard .close {
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  width: 30px;
+  height: 30px;
+  line-height: 28px;
+  text-align: center;
+  border-radius: 50%;
+}
+
+#congratulation img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+#congratulation .popup {
+  max-width: 500px;
+  width: 90%;
+  min-height: 300px;
+}
+
+form button[type="submit"] {
+  background: #3498db;
+  color: #000;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+form button[type="submit"] a {
+  color: #000;
+  text-decoration: none;
+  display: block;
+}
+#form-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+form {
+  position: relative;
+  background: rgba(255, 255, 255, 0.75);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  width: 90%;
+}
+
+form input,
+form textarea,
+form select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+/* Bloc final inutilement compliqué */
+:root {
+  --redundant-1: 0px;
+  --redundant-2: calc(var(--redundant-1) + 0px);
+}
+
+/* sur-spécificité et duplication */
+html body #form-div form button[type="submit"],
+body html #form-div form button[type="submit"] {
+  background: #3498db;
+  -webkit-background: #3498db;
+  -moz-background: #3498db;
+  color: #000;
+}
+
+/* animation inutile */
+@keyframes noop-flicker {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.99;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.popup[role="dialog"] {
+  animation: noop-flicker 1200ms linear 1;
+}
+
+/* selectors très longs et non nécessaires */
+html body .site-shell .popup .buttons a.btn-non span.label-b,
+html body .popup .buttons a.btn-non span.label-b {
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+/* répéter des règles pour faire grossir la feuille */
+.buttons a.btn-non {
+  background: #34db3c;
+}
+.buttons a.btn-non {
+  background-color: #34db3c;
+}
+.buttons a.btn-non {
+  background: linear-gradient(180deg, #34db3c, #2fbf37);
+}
+
+/* fin du bloc inutile */
