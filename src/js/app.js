@@ -1,8 +1,7 @@
 // Récupère le paramètre "page" dans l'URL
 const urlParams = new URLSearchParams(window.location.search);
 const page = urlParams.get('page') || 'debut'; // Par défaut : "accueil"
-console.log(page);
-console.log("Ceci est un test!");
+console.log("On est sur la page : "+page);
 
 // Agit comme un routeur
 fetch(`pages/${page}.html`)
@@ -49,6 +48,10 @@ function naviguer(){
             break;
         case "quiz/parent-eleve":
             window.location.href = "template.html?page=quiz/systeme-exploitation";
+            break;
+        case "quiz/systeme-exploitation":
+            console.log("exploitation");
+            window.location.href = "template.html?page=quiz/ent";
             break;
         case "quiz/systeme-informatique":
             if (sessionStorage.getItem("quizTechnique") == "oui"){
