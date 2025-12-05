@@ -71,15 +71,13 @@ label {
     font-size: 0.9rem;
     font-weight: 600;
     color: var(--text-muted);
-    align-self: flex-start;
-    margin-left: 10%; /* Alignement visuel avec les inputs */
     margin-bottom: -10px;
 }
 
 /* Styles des champs de saisie */
 input[type="text"],
 input[type="password"] {
-    width: 80%;
+    width: 50%;
     padding: 12px 15px;
     border: 1px solid #E0E0E0;
     border-radius: var(--border-radius);
@@ -133,6 +131,15 @@ button[type="submit"] {
 }
 button[type="submit"]:hover {
     background-color: #219150;
+}
+
+#charPosActuelle {
+    width: 20px;
+    font-size: 30px ;
+}
+
+#mdp {
+    width: 20%;
 }
 
 /* ========================================
