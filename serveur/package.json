@@ -7,6 +7,7 @@
     "start": "node --experimental-specifier-resolution=node src/app.js"
   },
   "dependencies": {
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "ejs": "^3.1.10",
@@ -15,7 +16,9 @@
     "helmet": "^8.1.0",
     "i18next": "^25.7.1",
     "i18next-browser-languagedetector": "^8.2.0",
+    "i18next-fs-backend": "^2.6.1",
     "i18next-http-backend": "^3.0.2",
+    "i18next-http-middleware": "^3.8.2",
     "sqlite3": "^5.1.7"
   },
   "devDependencies": {
