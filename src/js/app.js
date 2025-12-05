@@ -59,6 +59,10 @@ function naviguer(){
             break;
         case "quiz/ent":
             window.location.href = "template.html?page=quiz/"+ (role === "personnel" ? "messagerie" : "bureautique");
+            break;
+        case "quiz/messagerie":
+            window.location.href = "template.html?page=quiz/bureautique";
+            break;
         default:
             window.location.href = "template.html?page=quiz/debut";
     }
