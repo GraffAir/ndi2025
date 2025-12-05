@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>L'ergonomie</title>
+
+    <!-- 1. Chargement de Leaflet -->
+    <link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="../style/style.css">
+</head>
+<body>
+
+<header>
+    <nav>
+        <a href="/">accueil</a>
+        <a href="">OS</a>
+        <a href="">Projets</a>
+        <!-- ajouter pages et directions -->
+    </nav>
+</header>
+
+<main>
+    <h1>L'ergonomie : simplifier pour mieux vivre</h1>
+
+    <div id="badUiForm">
+        <button onclick="afficherCharActuel()">Lettre actuelle</button>
+
+        <input type="text" id="charPosActuelle" disabled>
+        <br>
+
+        <label for="mdp">Votre mot de passe</label> <br>
+        <input type="password" name="mdp" id="mdp" disabled>
+
+        <button onclick="validerChar()">Valider le charactère</button>
+
+
+        <div id="error-box"></div>
+        <div id="map">Chargement de la carte...</div>
+
+        <button type="submit">Validez</button>
+    </div>
+</main>
+
+<footer>
+    <div class="footer-container">
+
+        <!-- Colonne 1 : À propos / Logo -->
+        <div class="footer-col">
+            <h3>IAMS3</h3>
+            <p>Nuit de l'Info 2025.</p>
+        </div>
+
+        <!-- Colonne 2 : Liens rapides -->
+        <div class="footer-col">
+            <h3>Navigation</h3>
+            <ul>
+                <li><a href="/">Accueil</a></li>
+                <li><a href="/os">OS</a></li>
+                <li><a href="/projets">Projets</a></li>
+            </ul>
+        </div>
+
+        <!-- Colonne 3 : Légal / Contact -->
+        <div class="footer-col">
+            <h3>Légal</h3>
+            <ul>
+                <li><a href="#">Mentions légales</a></li>
+                <li><a href="#">Confidentialité</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        &copy; 2025 Hash Debug. GPL-3.0 license.
+    </div>
+</footer>
+
+
+<script src="../script/badUi/script.js"></script>
+<script>
+    showMyLocation();
+</script>
+</body>
+</html>
