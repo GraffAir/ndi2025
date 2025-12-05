@@ -200,29 +200,13 @@ router.get('/outils', (req, res) => {
   });
 });
 
-// 🏛️ COLLECTIVITES - servir la page statique publique
-console.log('🏛️ [ROUTES] Collectivites (page publique)');
+// 🏛️ COLLECTIVITES - rendu via EJS (intégré au layout)
+console.log('🏛️ [ROUTES] Collectivites (EJS view)');
 router.get('/collectivites', (req, res) => {
-  const file = path.join(__dirname, '..', 'public', 'html', 'collectivities.html');
-  console.log('[collectivites] requested file path =', file);
-  try {
-    if (!fs.existsSync(file)) {
-      console.error('[collectivites] file NOT FOUND:', file);
-      return res.status(404).send('Page des collectivités introuvable.');
-    }
-    res.setHeader('Content-Type', 'text/html; charset=utf-8');
-    res.sendFile(file, (err) => {
-      if (err) {
-        console.error('[collectivites] sendFile error:', err);
-        if (!res.headersSent) res.status(500).send('Erreur lors de la lecture de la page des collectivités.');
-      } else {
-        console.log('[collectivites] file sent OK');
-      }
-    });
-  } catch (ex) {
-    console.error('[collectivites] unexpected error:', ex && ex.stack ? ex.stack : ex);
-    if (!res.headersSent) res.status(500).send('Erreur serveur inattendue.');
-  }
+  res.render('collectivites', {
+    title: 'Collectivités & Démarche NIRD',
+    layout: 'layouts/main'
+  });
 });
 
 // 🎯 LOG FINAL

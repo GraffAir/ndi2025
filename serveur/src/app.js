@@ -4,6 +4,7 @@ const cors = require('cors');
 const path = require('path');
 const expressLayouts = require('express-ejs-layouts');
 const indexRouter = require('./routes/index');
+const fs = require('fs');
 
 const i18next = require('i18next');
 const i18nextBackend = require('i18next-fs-backend');
