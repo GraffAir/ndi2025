@@ -33,9 +33,10 @@ function gererChoix() {
 
 function naviguer(){
     console.log("On navigue vers : "+page);
+    const role = sessionStorage.getItem("quizRole");
     switch (page){
         case "quiz/debut":
-            switch (sessionStorage.getItem("quizRole")){
+            switch (role){
                 case "parent":
                     window.location.href = "template.html?page=quiz/parent-eleve";
                     break;
@@ -52,7 +53,12 @@ function naviguer(){
         case "quiz/systeme-informatique":
             if (sessionStorage.getItem("quizTechnique") == "oui"){
                 window.location.href = "template.html?page=quiz/pare-feu";
+            } else {
+                window.location.href = "template.html?page=quiz/systeme-exploitation";
             }
+            break;
+        case "quiz/ent":
+            window.location.href = "template.html?page=quiz/"+ (role === "personnel" ? "messagerie" : "bureautique");
         default:
             window.location.href = "template.html?page=quiz/debut";
     }
