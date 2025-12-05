@@ -20,8 +20,6 @@ const pourquoiCtrl = require('../controllers/pourquoiController.js');
 
 // 🎯 QCM - NOUVEAU !
 console.log('🎯 [ROUTES] QCMController chargé');
-const QCMCtrl = require('../controllers/qcmController.js');
-const qcmCtrl = new QCMCtrl();
 
 // 🏷️ CATÉGORIES - NOUVEAU !
 console.log('🏷️ [ROUTES] CategorieController chargé');
@@ -97,7 +95,7 @@ router.get('/reconditionnement', async (req, res) => {
         demarche: '/demarche',
         pourquoi: '/pourquoi',
         applications: '/applications',
-        tools: '/tools',
+        outils: '/outils',
         pilotes: '/pilotes',
       },
     });
@@ -112,7 +110,7 @@ router.get('/reconditionnement', async (req, res) => {
         demarche: '/demarche',
         pourquoi: '/pourquoi',
         applications: '/applications',
-        tools: '/tools',
+        outils: '/outils',
         pilotes: '/pilotes',
       },
     });
@@ -148,7 +146,7 @@ router.get('/applications', async (req, res) => {
         pourquoi: '/pourquoi',
         collectivites: '/collectivites',
         reconditionnement: '/reconditionnement', // ✅ Lien ajouté
-        tools: '/tools',
+        outils: '/outils',
         pilotes: '/pilotes',
       },
     });
@@ -164,7 +162,7 @@ router.get('/applications', async (req, res) => {
         pourquoi: '/pourquoi',
         collectivites: '/collectivites',
         reconditionnement: '/reconditionnement',
-        tools: '/tools',
+        outils: '/outils',
         pilotes: '/pilotes',
       },
     });
@@ -181,8 +179,8 @@ router.get('/nird', (req, res) => {
       { title: 'Pourquoi NIRD ?', url: '/pourquoi', icon: '❓' },
       { title: 'Collectivités', url: '/collectivites', icon: '🏛️' },
       { title: 'Reconditionnement', url: '/reconditionnement', icon: '🔧' },
-      { title: 'Quiz NIRD', url: '/quiz', icon: '🎯' }, // ✅ Ajouté
-      { title: 'Outils', url: '/tools', icon: '🛠️' },
+      { title: 'Quiz NIRD', url: '/quiz', icon: '🎯' },
+      { title: 'Outils', url: '/outils', icon: '🛠️' },
       { title: 'Démarche', url: '/demarche', icon: '🚸' },
       { title: 'Pilotes', url: '/pilotes', icon: '🏫' },
       { title: 'Applications', url: '/applications', icon: '💻' },
@@ -269,10 +267,10 @@ router.get(
 router.get('/categories/type/:type', categorieCtrl.byType.bind(categorieCtrl));
 router.get('/api/categories', categorieCtrl.apiIndex.bind(categorieCtrl));
 
-// 🔧 TOOLS (page statique simple)
-console.log('🛠️ [ROUTES] Tools OK');
-router.get('/tools', (req, res) => {
-  res.render('tools', {
+// 🔧 outils (page statique simple)
+console.log('🛠️ [ROUTES] outils OK');
+router.get('/outils', (req, res) => {
+  res.render('outils', {
     title: 'Outils NIRD',
     layout: 'layouts/main',
   });
@@ -286,7 +284,7 @@ console.log('   ✅ /reconditionnement  → 🔧 Guide 5 étapes + stats DB');
 console.log('   ✅ /applications      → 💻 TOUTES les apps DB');
 console.log('   ✅ /demarche          → 🚸 Page principale');
 console.log('   ✅ /pourquoi          → ❓ Références');
-console.log('   ✅ /tools             → 🛠️ Scripts + docs');
+console.log('   ✅ /outils             → 🛠️ Scripts + docs');
 console.log('🏫 + /pilotes (18 établissements)');
 console.log('🎯 + /qcm /categories /logiciels');
 

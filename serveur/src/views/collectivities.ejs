@@ -1,101 +1,278 @@
-<h1>Collectivités et démarche NIRD</h1>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collectivités et Démarche NIRD</title>
+    <style>
+        /* --- DESIGN SYSTEM "NUIT PROFONDE" --- */
+        :root {
+            --primary-violet: #764ba2;
+            --secondary-blue: #667eea;
+            --accent-pink: #f093fb;
+            --bg-dark: #05040a;
+            --text-main: #f3f4f6;
+            --text-muted: #d1d5db;
+            
+            /* Styles des blocs en verre */
+            --glass-bg: rgba(30, 20, 60, 0.7);
+            --glass-border: rgba(139, 92, 246, 0.2);
+            --card-hover-border: rgba(240, 147, 251, 0.5);
+        }
 
-<p>La <strong>démarche NIRD</strong> propose aux établissements scolaires de repenser l'usage du numérique en adéquation
-    avec les objectifs de développement durable. Elle se veut à la fois <strong>écologique, économique et
-        éducative</strong>. Les <strong>collectivités</strong>, qui assurent l'équipement et la maintenance du parc des
-    établissements, en sont des <strong>acteurs incontournables</strong> et peuvent jouer <strong>un rôle
-        moteur</strong> dans sa réussite, en y facilitant notamment l'intégration des postes sous Linux
-    [web:1][attached_file:1].</p>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-<h2>Bénéfices pour les collectivités</h2>
-<p>Soutenir la démarche NIRD présente plusieurs bénéfices pour les collectivités [web:1].</p>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.7;
+            min-height: 100vh;
+            padding-bottom: 80px;
+        }
 
-<h2>Leviers concrets d'action</h2>
-<p>Les collectivités disposent de leviers concrets pour soutenir les établissements scolaires engagés dans la démarche
-    [web:1].</p>
+        /* Arrière-plan d'ambiance */
+        .ambient-glow {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background:
+                radial-gradient(circle at 5% 10%, rgba(118, 75, 162, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 95% 90%, rgba(102, 126, 234, 0.05) 0%, transparent 40%);
+            z-index: -1;
+            pointer-events: none;
+        }
 
-<h2>Vers un numérique territorial responsable</h2>
-<p>En soutenant la démarche NIRD, les collectivités ne se contentent pas d'accompagner les établissements scolaires :
-    elles posent les bases d'un <strong>numérique territorial plus sobre, plus sûr et plus solidaire</strong>. Leur
-    engagement permet de transformer une initiative éducative en un véritable <strong>projet de société</strong>, qui
-    associe élèves, enseignants, familles et acteurs locaux autour d'un objectif commun : <strong>faire du numérique un
-        levier d'inclusion, de responsabilité et de durabilité</strong> [web:1][attached_file:1].</p>
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
 
-<h2>Accompagnement et distributions Linux</h2>
-<p>Vous trouverez sur notre page Linux une proposition de distribution Linux à installer dans les établissements
-    scolaires. Elles ont été conçues par et pour des enseignantes et enseignants. Elles bénéficient du soutien de la
-    Direction du numérique pour l'éducation [web:1].</p>
+        /* Typography */
+        h1 {
+            font-size: clamp(32px, 5vw, 42px);
+            font-weight: 900;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #ffffff 40%, var(--accent-pink) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+        }
 
-<p>Le collectif peut vous accompagner en assurant à distance un support pédagogique et technique de premier niveau
-    (forum Tchap) et en organisant des webinaires de démonstration et formation [web:1].</p>
+        h2 {
+            font-size: 24px;
+            font-weight: 800;
+            margin: 50px 0 24px;
+            color: #fff;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.3);
+        }
 
-<h2>Exemples d'engagements collectifs</h2>
-<p>De plus en plus de collectivités intègrent les valeurs de la démarche NIRD dans leur stratégie numérique et certaines
-    y adhérent même déjà explicitement [web:1].</p>
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+        
+        .glass-panel p { color: #e5e7eb; }
 
-<blockquote>« Leader des systèmes d'exploitation pour ordinateurs de type PC, Microsoft Windows reste incontournable.
-    Cependant, il nous apparait utile de développer une offre d'OS alternative, et ce, pour plusieurs raisons : fin de
-    support Windows 10, logiciels dorénavant multiplateformes, souveraineté numérique, ouverture des programmes
-    d'enseignement et vétusté des stations. Cette offre Linux a aussi pour but de s'inscrire dans la démarche NIRD.
-    »<br><span class="cite-source">→ Source du document (Stations Linux GIP RECIA, 2025)</span>[web:1]</blockquote>
+        strong { color: #fff; font-weight: 600; }
+        em { color: var(--accent-pink); font-style: normal; }
+        
+        a { color: var(--accent-pink); text-decoration: none; border-bottom: 1px dotted var(--accent-pink); transition: all 0.2s; }
+        a:hover { color: #fff; border-bottom-style: solid; }
 
-<blockquote>« Mise à disposition d'un master Linux pour les postes de travail. Après une phase de test sur des lycées
-    pilotes, un nouveau master Linux est mis à disposition. Les lycées qui le souhaitent peuvent déployer Linux avec des
-    outils de restauration comparables à celui proposé actuellement pour Windows par notre prestataire, avec quelques
-    adaptations toutefois. »<br><span class="cite-source">→ Source du document (Site de la Drane de Lyon,
-        2025)</span>[web:1]</blockquote>
+        /* --- BLOCS DE CONTENU --- */
+        
+        /* Intro Box */
+        .intro-box {
+            background: rgba(40, 30, 60, 0.6);
+            border-left: 4px solid var(--accent-pink);
+            padding: 32px;
+            border-radius: 16px;
+            margin-bottom: 40px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+        }
+        .intro-box p:last-child { margin-bottom: 0; }
 
-<blockquote>« Face à l'annonce irresponsable de Microsoft de ne plus mettre à jour son système d'exploitation Windows
-    10, qui va rendre obsolète plus de 400 millions d'ordinateurs dans le monde, la Ville a décidé de convertir
-    progressivement les ordinateurs qu'elle fournit aux écoles sous Linux (PrimTux), le système d'exploitation libre et
-    gratuit. Une expérimentation est ainsi menée dans trois écoles élémentaires. Une opportunité éducative mais aussi
-    environnementale qui prolongera la durée de vie des ordinateurs. »<br><span class="cite-source">→ Source du document
-        (site de la ville, 2025)</span>[web:1][attached_file:1]</blockquote>
+        /* Panneau standard */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 32px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
 
-<blockquote>« Il y a au moins trois bonnes raisons de mettre Linux dans les écoles : montrer à la communauté éducative
-    que ça ne change rien, faire réfléchir les agents de la mairie (sont-ils incapables d'y passer aussi, comme les
-    gendarmes et les enfants ?) et faire durer les ordinateurs (la nouvelle version d'un système d'exploitation ne doit
-    pas être le motif d'un renouvellement d'un parc). Le service informatique ne peut pas prendre en charge la
-    maintenance de parc d'environ 300 machines sous Linux ? Qu'à cela ne tienne ! On peut mettre la maintenance dans le
-    marché (UGAP). »<br><span class="cite-source">→ Source du document (Adullact, 2025)</span>[web:1][attached_file:1]
-</blockquote>
+        /* Citations / Exemples */
+        .quote-card {
+            background: rgba(15, 12, 28, 0.85); 
+            border: 1px solid rgba(139, 92, 246, 0.15);
+            border-left: 4px solid var(--secondary-blue);
+            border-radius: 16px;
+            padding: 24px 30px;
+            margin-bottom: 24px;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
 
-<blockquote>« Dans la continuité de ses engagements en faveur d'un numérique responsable, la Ville des Abymes franchit
-    une étape décisive avec le lancement du pack éC0 Libre. Ce dispositif se veut un kit d'émancipation technologique
-    pour un numérique libre, responsable et durable. Accessible à tous, il invite à se libérer des contraintes imposées
-    par les géants du web GAMMA (Google, Amazon, Méta, Microsoft, Apple) et à promouvoir une souveraineté collective.
-    »<br><span class="cite-source">→ Source du document (Site dédié de la ville des Abymes,
-        2025)</span>[web:1][attached_file:1]</blockquote>
+        .quote-card:hover {
+            transform: translateX(5px);
+            border-left-color: var(--accent-pink);
+            background: rgba(20, 16, 35, 0.95);
+            border-color: rgba(240, 147, 251, 0.3);
+        }
 
-<blockquote>« La Ville de Lyon remplace progressivement les logiciels de Microsoft par des alternatives libres. Cette
-    transition vise à renforcer la souveraineté technologique du service public et à prolonger la durée de vie des
-    équipements informatiques et ainsi réduire leur empreinte environnementale. »<br><span class="cite-source">→ Source
-        du document (CP de la ville de Lyon, 2025)</span>[web:1][attached_file:1]</blockquote>
+        blockquote {
+            margin: 0;
+            font-size: 1.05rem;
+            color: #ffffff;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
 
-<blockquote>« Dans ce paysage numérique il y a ces géants appelés les GAFAM, des entreprises mondiales dominant leur
-    secteur d'activité. Il est question d'obsolescence programmée, de trafic de données, de problème de sécurité, de
-    perte de liberté et de souveraineté. La Ville de Grenoble propose ce « kit d'accès » aux logiciels libres,
-    pédagogique et facile à utiliser pour permettre à chacun.e d'échapper à l'emprise technique des GAFAM en utilisant
-    des logiciels et services libres, sans traçage, sans utilisation des données personnelles, pour les ordinateurs
-    comme pour les smartphones. »<br><span class="cite-source">→ Source du document (Site dédié de la ville de Grenoble,
-        2025)</span>[web:1][attached_file:1]</blockquote>
+        .cite-source {
+            display: block;
+            margin-top: 12px;
+            font-size: 0.9rem;
+            color: var(--accent-pink);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.9;
+            font-style: normal;
+        }
 
-<blockquote>« La création de la cellule « Stratégie Logiciels Libres » s'inscrit dans la démarche "Numérique
-    Responsable" menée par la Direction du numérique et des systèmes d'information de la ville et l'Eurométropole de
-    Strasbourg. Elle s'intègre parfaitement dans ses trois axes : sobriétés numériques, solidarités numériques et
-    libertés numériques. L'utilisation de logiciels libres favorise la prolongation de la durée de vie des équipements,
-    réduit l'empreinte environnementale en mutualisant les ressources et permet une meilleure adaptation aux besoins des
-    utilisateurs, évitant ainsi les dérives techniques et fonctionnelles. La promotion de solutions libres lutte contre
-    la fracture numérique et favorise la mise en œuvre de services numériques pour toutes et tous. L'utilisation de
-    logiciels libres améliore la souveraineté numérique en limitant la dépendance aux éditeurs propriétaires et en
-    permettant une meilleure maîtrise des outils, des données et de leur sécurité. Cette démarche se place dans le cadre
-    d'une collaboration constructive avec d'autres territoires et communautés pour mutualiser les ressources et
-    renforcer la résilience de l'écosystème numérique. »<br><span class="cite-source">→ Source du document (Métropole de
-        Strasbourg, 2025)</span>[web:1][attached_file:1]</blockquote>
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container { padding: 30px 20px; }
+            h1 { font-size: 32px; }
+            .glass-panel, .intro-box { padding: 24px; }
+        }
 
-<blockquote>« Les collectivités et administrations diverses sont-elles définitivement soumises aux desiderata de
-    Microsoft ? Une dynamique s'enclenche pour basculer vers le libre, avec à la clé une souveraineté retrouvée, de
-    substantielles économies et un impact écologique largement amoindri […] Le chemin vers la liberté est long, mais
-    porte rapidement ses fruits : sur un budget informatique d'un million d'euros, l'utilisation massive de logiciels
-    libres permet déjà à la ville Échirolles d'économiser environ 350 000 euros par an ! »<br><span
-        class="cite-source">→ Source du document (L'âge de faire, 2025)</span>[web:1][attached_file:1]</blockquote>
+    </style>
+</head>
+<body>
+
+    <div class="ambient-glow"></div>
+
+    <div class="container">
+        
+        <header>
+            <h1>Collectivités et démarche NIRD</h1>
+        </header>
+
+        <section class="intro-box">
+            <p>
+                La <strong>démarche NIRD</strong> propose aux établissements scolaires de repenser l'usage du numérique en adéquation avec les objectifs de développement durable. Elle se veut à la fois <strong>écologique, économique et éducative</strong>. 
+            </p>
+            <p>
+                Les <strong>collectivités</strong>, qui assurent l'équipement et la maintenance du parc des établissements, en sont des <strong>acteurs incontournables</strong> et peuvent jouer <strong>un rôle moteur</strong> dans sa réussite, en y facilitant notamment l'intégration des postes sous Linux.
+            </p>
+        </section>
+
+        <section class="glass-panel">
+            <h2>Bénéfices pour les collectivités</h2>
+            <p>Soutenir la démarche NIRD présente plusieurs bénéfices pour les collectivités, notamment en termes de maîtrise des coûts, de prolongation de la durée de vie du matériel et de réponse aux enjeux de souveraineté numérique.</p>
+
+            <h2>Leviers concrets d'action</h2>
+            <p>Les collectivités disposent de leviers concrets pour soutenir les établissements scolaires engagés dans la démarche : intégration de clauses de durabilité dans les marchés publics, soutien aux initiatives de reconditionnement local, et formation des agents techniques aux solutions libres.</p>
+
+            <h2>Vers un numérique territorial responsable</h2>
+            <p>
+                En soutenant la démarche NIRD, les collectivités ne se contentent pas d'accompagner les établissements scolaires : elles posent les bases d'un <strong>numérique territorial plus sobre, plus sûr et plus solidaire</strong>.
+            </p>
+            <p style="margin-bottom:0;">
+                Leur engagement permet de transformer une initiative éducative en un véritable <strong>projet de société</strong>, qui associe élèves, enseignants, familles et acteurs locaux autour d'un objectif commun : <strong>faire du numérique un levier d'inclusion, de responsabilité et de durabilité</strong>.
+            </p>
+        </section>
+
+        <section class="glass-panel">
+            <h2 style="margin-top:0;">Accompagnement et distributions Linux</h2>
+            <p>
+                Vous trouverez sur notre page <a href="#">Linux</a> une proposition de distribution Linux à installer dans les établissements scolaires. Elles ont été conçues par et pour des enseignantes et enseignants. Elles bénéficient du soutien de la Direction du numérique pour l'éducation.
+            </p>
+            <p style="margin-bottom:0;">
+                Le collectif peut vous accompagner en assurant à distance un support pédagogique et technique de premier niveau (forum Tchap) et en organisant des webinaires de démonstration et formation.
+            </p>
+        </section>
+
+        <section>
+            <h2>Exemples d'engagements collectifs</h2>
+            <p>De plus en plus de collectivités intègrent les valeurs de la démarche NIRD dans leur stratégie numérique et certaines y adhérent même déjà explicitement.</p>
+
+            <div class="quote-card">
+                <blockquote>
+                    « Leader des systèmes d'exploitation pour ordinateurs de type PC, Microsoft Windows reste incontournable. Cependant, il nous apparait utile de développer une offre d'OS alternative [...] Cette offre Linux a aussi pour but de s'inscrire dans la démarche NIRD. »
+                </blockquote>
+                <span class="cite-source">→ Source : Stations Linux GIP RECIA, 2025</span>
+            </div>
+
+            <div class="quote-card">
+                <blockquote>
+                    « Mise à disposition d'un master Linux pour les postes de travail. Après une phase de test sur des lycées pilotes, un nouveau master Linux est mis à disposition. »
+                </blockquote>
+                <span class="cite-source">→ Source : Drane de Lyon, 2025</span>
+            </div>
+
+            <div class="quote-card">
+                <blockquote>
+                    « Face à l'annonce irresponsable de Microsoft de ne plus mettre à jour son système d'exploitation Windows 10 [...] la Ville a décidé de convertir progressivement les ordinateurs qu'elle fournit aux écoles sous Linux (PrimTux). »
+                </blockquote>
+                <span class="cite-source">→ Source : Site de la ville, 2025</span>
+            </div>
+
+            <div class="quote-card">
+                <blockquote>
+                    « Il y a au moins trois bonnes raisons de mettre Linux dans les écoles : montrer à la communauté éducative que ça ne change rien, faire réfléchir les agents de la mairie [...] et faire durer les ordinateurs. »
+                </blockquote>
+                <span class="cite-source">→ Source : Adullact, 2025</span>
+            </div>
+
+            <div class="quote-card">
+                <blockquote>
+                    « Dans la continuité de ses engagements en faveur d'un numérique responsable, la Ville des Abymes franchit une étape décisive avec le lancement du pack éC0 Libre. »
+                </blockquote>
+                <span class="cite-source">→ Source : Ville des Abymes, 2025</span>
+            </div>
+
+            <div class="quote-card">
+                <blockquote>
+                    « La Ville de Lyon remplace progressivement les logiciels de Microsoft par des alternatives libres. Cette transition vise à renforcer la souveraineté technologique du service public... »
+                </blockquote>
+                <span class="cite-source">→ Source : Ville de Lyon, 2025</span>
+            </div>
+
+            <div class="quote-card">
+                <blockquote>
+                    « La Ville de Grenoble propose ce « kit d'accès » aux logiciels libres, pédagogique et facile à utiliser pour permettre à chacun.e d'échapper à l'emprise technique des GAFAM... »
+                </blockquote>
+                <span class="cite-source">→ Source : Ville de Grenoble, 2025</span>
+            </div>
+
+            <div class="quote-card">
+                <blockquote>
+                    « La création de la cellule « Stratégie Logiciels Libres » s'inscrit dans la démarche "Numérique Responsable" menée par la Direction du numérique et des systèmes d'information de la ville et l'Eurométropole de Strasbourg. »
+                </blockquote>
+                <span class="cite-source">→ Source : Métropole de Strasbourg, 2025</span>
+            </div>
+
+            <div class="quote-card">
+                <blockquote>
+                    « Une dynamique s'enclenche pour basculer vers le libre [...] sur un budget informatique d'un million d'euros, l'utilisation massive de logiciels libres permet déjà à la ville Échirolles d'économiser environ 350 000 euros par an ! »
+                </blockquote>
+                <span class="cite-source">→ Source : Ville d'Échirolles</span>
+            </div>
+
+        </section>
+
+    </div>
+
+</body>
+</html>        class="cite-source">→ Source du document (L'âge de faire, 2025)</span>[web:1][attached_file:1]</blockquote>
