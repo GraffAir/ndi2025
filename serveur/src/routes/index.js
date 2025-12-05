@@ -39,7 +39,10 @@ router.get('/api/test', homeController.apiTest.bind(homeController));
 console.log('👥 [ROUTES] Utilisateurs OK');
 router.get('/utilisateurs', utilisateursCtrl.index.bind(utilisateursCtrl));
 router.get('/utilisateurs/:id', utilisateursCtrl.show.bind(utilisateursCtrl));
-router.get('/api/utilisateurs', utilisateursCtrl.apiIndex.bind(utilisateursCtrl));
+router.get(
+  '/api/utilisateurs',
+  utilisateursCtrl.apiIndex.bind(utilisateursCtrl)
+);
 
 // 💾 LOGICIELS
 console.log('💾 [ROUTES] Logiciels OK');
@@ -50,9 +53,18 @@ router.get('/api/logiciels', logicielsCtrl.apiIndex.bind(logicielsCtrl));
 // 🐧 LINUX
 console.log('🐧 [ROUTES] Linux OK');
 router.get('/linux', linuxCtrl.index.bind(linuxCtrl));
-router.get('/api/linux/distributions', linuxCtrl.apiDistributions.bind(linuxCtrl));
-router.get('/api/linux/distributions/:id', linuxCtrl.apiDistributionById.bind(linuxCtrl));
-router.get('/api/linux/distributions/search', linuxCtrl.apiSearch.bind(linuxCtrl));
+router.get(
+  '/api/linux/distributions',
+  linuxCtrl.apiDistributions.bind(linuxCtrl)
+);
+router.get(
+  '/api/linux/distributions/:id',
+  linuxCtrl.apiDistributionById.bind(linuxCtrl)
+);
+router.get(
+  '/api/linux/distributions/search',
+  linuxCtrl.apiSearch.bind(linuxCtrl)
+);
 router.get('/linux/dashboard', linuxCtrl.dashboard.bind(linuxCtrl));
 
 // 🚸 DÉMARCHE NIRD - ✅ ULTRA-SÉCURISÉ
@@ -70,24 +82,24 @@ router.get('/reconditionnement', async (req, res) => {
   try {
     const [totalPilotes, totalLogiciels] = await Promise.all([
       pilotesCtrl.count ? pilotesCtrl.count() : Promise.resolve(18),
-      logicielsCtrl.count()
+      logicielsCtrl.count(),
     ]);
-    
+
     res.render('reconditionnement', {
       title: 'Reconditionnement PC Scolaire - NIRD',
       layout: 'layouts/main',
       stats: {
         pilotes: totalPilotes || 18,
         logiciels: totalLogiciels?.count || 0,
-        economise: '95%'
+        economise: '95%',
       },
       pages: {
         demarche: '/demarche',
         pourquoi: '/pourquoi',
         applications: '/applications',
         tools: '/tools',
-        pilotes: '/pilotes'
-      }
+        pilotes: '/pilotes',
+      },
     });
   } catch (err) {
     console.error('Reconditionnement error:', err);
@@ -101,8 +113,8 @@ router.get('/reconditionnement', async (req, res) => {
         pourquoi: '/pourquoi',
         applications: '/applications',
         tools: '/tools',
-        pilotes: '/pilotes'
-      }
+        pilotes: '/pilotes',
+      },
     });
   }
 });
@@ -113,29 +125,32 @@ router.get('/applications', async (req, res) => {
   try {
     const [totalApps, popularApps] = await Promise.all([
       logicielsCtrl.count(),
-      logicielsCtrl.all() // ✅ TOUTES les apps, pas de limite !
+      logicielsCtrl.all(), // ✅ TOUTES les apps, pas de limite !
     ]);
-    
+
     res.render('applications', {
       title: 'Applications Linux NIRD',
       layout: 'layouts/main',
       totalApps: totalApps?.count || 0,
-      popularApps: popularApps.map(app => ({
+      popularApps: popularApps.map((app) => ({
         nom: app.nom,
         description: app.description || 'Application éducative NIRD',
         icon: app.icon || '📱',
-        utilisateurs: app.downloads || app.utilisateurs || Math.floor(Math.random() * 3000) + 500,
+        utilisateurs:
+          app.downloads ||
+          app.utilisateurs ||
+          Math.floor(Math.random() * 3000) + 500,
         note: app.note || 4.8,
-        categorie: app.categorie || app.platform || 'Éducation'
+        categorie: app.categorie || app.platform || 'Éducation',
       })),
       pages: {
         demarche: '/demarche',
         pourquoi: '/pourquoi',
         collectivites: '/collectivites',
-        reconditionnement: '/reconditionnement',  // ✅ Lien ajouté
+        reconditionnement: '/reconditionnement', // ✅ Lien ajouté
         tools: '/tools',
-        pilotes: '/pilotes'
-      }
+        pilotes: '/pilotes',
+      },
     });
   } catch (err) {
     console.error('Applications DB error:', err);
@@ -150,8 +165,8 @@ router.get('/applications', async (req, res) => {
         collectivites: '/collectivites',
         reconditionnement: '/reconditionnement',
         tools: '/tools',
-        pilotes: '/pilotes'
-      }
+        pilotes: '/pilotes',
+      },
     });
   }
 });
@@ -165,12 +180,13 @@ router.get('/nird', (req, res) => {
     sections: [
       { title: 'Pourquoi NIRD ?', url: '/pourquoi', icon: '❓' },
       { title: 'Collectivités', url: '/collectivites', icon: '🏛️' },
-      { title: 'Reconditionnement', url: '/reconditionnement', icon: '🔧' },  // ✅ Ajouté
+      { title: 'Reconditionnement', url: '/reconditionnement', icon: '🔧' },
+      { title: 'Quiz NIRD', url: '/quiz', icon: '🎯' }, // ✅ Ajouté
       { title: 'Outils', url: '/tools', icon: '🛠️' },
       { title: 'Démarche', url: '/demarche', icon: '🚸' },
       { title: 'Pilotes', url: '/pilotes', icon: '🏫' },
-      { title: 'Applications', url: '/applications', icon: '💻' }
-    ]
+      { title: 'Applications', url: '/applications', icon: '💻' },
+    ],
   });
 });
 
@@ -194,11 +210,62 @@ router.get('/qcm/categorie/:categorie', qcmCtrl.byCategory.bind(qcmCtrl));
 router.get('/api/qcm', qcmCtrl.apiIndex.bind(qcmCtrl));
 router.get('/api/qcm/:id', qcmCtrl.apiShow.bind(qcmCtrl));
 
+// 🎯 QUIZ NIRD - Questionnaire interactif
+console.log('🎯 [ROUTES] Quiz NIRD OK');
+const path = require('path');
+const fs = require('fs');
+
+// Page principale du quiz
+router.get('/quiz', (req, res) => {
+  res.render('quiz/index', {
+    title: 'Quiz NIRD - Évaluez votre établissement',
+    layout: 'layouts/main',
+    pageCSS: 'quiz',
+    pageJS: 'quiz',
+  });
+});
+
+// Partials HTML pour le chargement dynamique des questions
+router.get('/quiz/partial/:filename', (req, res) => {
+  const filename = req.params.filename;
+  // Sécurité : vérifier que le fichier est valide
+  const allowedFiles = [
+    'debut.html',
+    'bureautique.html',
+    'eleve-implication.html',
+    'ent.html',
+    'messagerie.html',
+    'navigateur.html',
+    'parent-eleve.html',
+    'recherche.html',
+    'resultats.html',
+    'systeme-exploitation.html',
+    'systeme-informatique.html',
+  ];
+
+  if (!allowedFiles.includes(filename)) {
+    return res.status(404).send('Fichier non trouvé');
+  }
+
+  const filePath = path.join(__dirname, '../views/quiz', filename);
+
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Erreur lecture fichier quiz:', err);
+      return res.status(404).send('Fichier non trouvé');
+    }
+    res.type('text/html').send(data);
+  });
+});
+
 // 🏷️ CATÉGORIES - NOUVEAU !
 console.log('🏷️ [ROUTES] Catégories OK (stats + types)');
 router.get('/categories', categorieCtrl.index.bind(categorieCtrl));
 router.get('/categories/:id', categorieCtrl.show.bind(categorieCtrl));
-router.get('/categories/dashboard', categorieCtrl.dashboard.bind(categorieCtrl));
+router.get(
+  '/categories/dashboard',
+  categorieCtrl.dashboard.bind(categorieCtrl)
+);
 router.get('/categories/type/:type', categorieCtrl.byType.bind(categorieCtrl));
 router.get('/api/categories', categorieCtrl.apiIndex.bind(categorieCtrl));
 
@@ -207,13 +274,14 @@ console.log('🛠️ [ROUTES] Tools OK');
 router.get('/tools', (req, res) => {
   res.render('tools', {
     title: 'Outils NIRD',
-    layout: 'layouts/main'
+    layout: 'layouts/main',
   });
 });
 
 // 🎯 LOG FINAL
 console.log('✅ [ROUTES] SERVEUR DÉMARRÉ SANS ERREUR ! 🎉');
-console.log('🚀 NIRD ACTIVES (14 routes):');
+console.log('🚀 NIRD ACTIVES (15 routes):');
+console.log('   ✅ /quiz               → 🎯 Quiz interactif NIRD');
 console.log('   ✅ /reconditionnement  → 🔧 Guide 5 étapes + stats DB');
 console.log('   ✅ /applications      → 💻 TOUTES les apps DB');
 console.log('   ✅ /demarche          → 🚸 Page principale');
