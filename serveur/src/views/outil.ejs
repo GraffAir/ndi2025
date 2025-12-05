@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boite à outils - NIRD</title>
+    <style>
+        /* --- DESIGN SYSTEM --- */
+        :root {
+            --primary-violet: #764ba2;
+            --secondary-blue: #667eea;
+            --accent-pink: #f093fb;
+            --bg-dark: #05040a;
+            --text-main: #f3f4f6;
+            --text-muted: #d1d5db;
+            
+            /* Styles des blocs en verre */
+            --glass-bg: rgba(30, 20, 60, 0.6);
+            --glass-border: rgba(139, 92, 246, 0.2);
+            --card-hover-border: rgba(240, 147, 251, 0.5);
+            
+            /* Spécifique aux boutons */
+            --btn-glass-bg: rgba(102, 126, 234, 0.2);
+            --btn-glass-border: rgba(102, 126, 234, 0.4);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 80px;
+        }
+
+        /* Arrière-plan d'ambiance */
+        .ambient-glow {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background:
+                radial-gradient(circle at 15% 25%, rgba(118, 75, 162, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 75%, rgba(102, 126, 234, 0.05) 0%, transparent 40%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: clamp(32px, 5vw, 42px);
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 26px;
+            font-weight: 800;
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        
+        h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #ffffff 40%, var(--accent-pink) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        a { color: var(--accent-pink); text-decoration: none; transition: all 0.2s; border-bottom: 1px dotted var(--accent-pink); }
+        a:hover { color: #fff; border-bottom-style: solid; }
+
+        /* --- BLOCS DE CONTENU --- */
+        
+        /* Intro Box */
+        .intro-box {
+            background: rgba(40, 30, 60, 0.5);
+            border-left: 4px solid var(--accent-pink);
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 50px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Panneaux principaux */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 32px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .glass-panel:hover {
+            transform: translateY(-5px);
+            border-color: var(--card-hover-border);
+        }
+
+        /* Listes stylisées pour les besoins */
+        ul.needs-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        ul.needs-list li {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-weight: 500;
+            text-align: center;
+        }
+        
+        ul.needs-list li strong {
+            color: var(--accent-pink);
+            display: block;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        /* Grille des outils */
+        .toolbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .tool-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .tool-card:hover {
+            background: rgba(255, 255, 255, 0.07);
+            transform: translateY(-5px);
+            border-color: var(--accent-pink);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .tool-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+
+        /* Section Contribution / CTA */
+        .contribute-section {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            border: 1px solid var(--glass-border);
+        }
+
+        .btn-action {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white !important;
+            font-weight: 700;
+            border-radius: 50px;
+            text-decoration: none !important;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+
+        .btn-action:hover {
+            transform: scale(1.05);
+            border-bottom: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 32px; }
+            h2 { font-size: 24px; }
+            .glass-panel { padding: 24px; }
+            .toolbox-grid { grid-template-columns: 1fr; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="ambient-glow"></div>
+
+    <div class="container">
+        
+        <header style="text-align: center; margin-bottom: 50px;">
+            <h1>
+                🛠️ Bienvenue dans la boite à outils de <span class="gradient-text">la Démarche NIRD</span>
+            </h1>
+            <p style="font-size: 1.2rem; color: var(--accent-pink); margin-top: 10px;">
+                Pour un numérique <strong>libre</strong> et <strong>écocitoyen</strong> dans les établissements scolaires !
+            </p>
+        </header>
+
+        <section class="intro-box">
+            <h2>📚 Documentations techniques</h2>
+            <p>Ici vous pourrez retrouver les différentes <em>documentations techniques</em> de la démarche, centralisées pour faciliter leur accès et leur mise à jour.</p>
+        </section>
+
+        <section class="glass-panel">
+            <h2>💡 Besoins identifiés</h2>
+            <p>Au fur et à mesure de nos discussions sur Tchap ont émergé <strong>deux besoins majeurs</strong> :</p>
+            
+            <ul class="needs-list">
+                <li>
+                    <strong>Documenter</strong>
+                    les pratiques et retours d'expérience
+                </li>
+                <li>
+                    <strong>Standardiser</strong>
+                    les déploiements techniques
+                </li>
+            </ul>
+        </section>
+
+        <section class="glass-panel">
+            <h2>🔧 Outils disponibles</h2>
+            <p style="margin-bottom: 30px;">Pour répondre à ces besoins, nous mettons à disposition plusieurs <strong>outils</strong> :</p>
+
+            <div class="toolbox-grid">
+                <div class="tool-card">
+                    <h3>📋 Guide d'installation</h3>
+                    <p>Guide pas-à-pas pour installer les distributions Linux NIRD sur vos postes en toute sérénité.</p>
+                </div>
+                <div class="tool-card">
+                    <h3>⚙️ Scripts d'automatisation</h3>
+                    <p>Scripts prêts à l'emploi pour les déploiements en masse (Ansible, Bash, etc.).</p>
+                </div>
+                <div class="tool-card">
+                    <h3>🔍 Diagnostic matériel</h3>
+                    <p>Outils pour évaluer la compatibilité technique des machines avant le reconditionnement.</p>
+                </div>
+                <div class="tool-card">
+                    <h3>📊 Suivi de parc</h3>
+                    <p>Dashboard et modèles pour monitorer l'état et l'inventaire de votre parc informatique.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="contribute-section">
+            <h2>🚀 Contribuer à la boite à outils</h2>
+            <p>Votre expérience terrain est précieuse ! Partagez vos scripts, guides et bonnes pratiques pour enrichir cette boite à outils commune.</p>
+            
+            <a href="https://tchap.gouv.fr/#/group/nird" class="btn-action" target="_blank">
+                💬 Rejoignez-nous sur Tchap
+            </a>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 15px;">Pour partager vos besoins et contributions.</p>
+        </section>
+
+    </div>
+
+</body>
+</html>

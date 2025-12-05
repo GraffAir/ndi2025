@@ -1,0 +1,247 @@
+<style>
+  /* Navbar - Product Hunt style */
+.site-header {
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+}
+.site-header__inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 15px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.site-logo a {
+  font-weight: 700;
+  color: #1f2937;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+/* Center navigation */
+.site-nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 30px;
+}
+.site-nav__list a {
+  color: #6b7280;
+  font-size: 14px;
+  text-decoration: none;
+  transition: color .15s ease;
+}
+.site-nav__list a:hover { color: #1f2937; }
+
+/* Actions on the right */
+.site-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 6px;
+}
+.submit-btn {
+  border: 1px solid #d1d5db;
+  background: transparent;
+  color: #111827;
+}
+.login-link {
+  color: #6b7280;
+  text-decoration: none;
+}
+
+/* Burger (hidden on desktop) */
+.burger {
+  background: transparent;
+  border: none;
+  display: none;
+  cursor: pointer;
+  padding: 8px;
+}
+.burger__box { display: inline-block; width: 20px; height: 14px; position: relative; }
+.burger__inner, .burger__inner::before, .burger__inner::after {
+  width: 20px;
+  height: 2px;
+  background: #111827;
+  display: block;
+  position: absolute;
+  transition: transform .2s ease;
+}
+.burger__inner { top: 50%; transform: translateY(-50%); }
+.burger__inner::before { content: ""; top: -6px; left: 0; }
+.burger__inner::after { content: ""; top: 6px; left: 0; }
+
+/* Mobile overlay menu */
+.mobile-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 60;
+}
+.mobile-overlay__inner {
+  background: #fff;
+  width: 280px;
+  max-width: calc(100% - 40px);
+  height: 100%;
+  padding: 24px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+}
+.mobile-overlay__close {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  float: right;
+  cursor: pointer;
+}
+.mobile-nav {
+  list-style: none;
+  padding: 20px 0 0 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.mobile-nav a { color: #1f2937; text-decoration: none; font-weight: 500; }
+
+/* Hero styles */
+.hero-section {
+  background: #f9fafb;
+  padding: 80px 40px 60px;
+}
+.hero-container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
+}
+.hero-badge {
+  display: inline-block;
+  background: #e5e7eb;
+  border-radius: 12px;
+  padding: 7px 12px; /* légèrement réduit vertical padding pour cohérence */
+  font-size: 14px;
+  color: #6b7280;
+  font-weight: 500;
+}
+.hero-title {
+  margin-top: 25px;
+  font-size: 32px;
+  color: #1f2937;
+  font-weight: 500;
+  line-height: 1.3;
+}
+.hero-subtitle {
+  margin-top: 15px;
+  font-size: 18px;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+/* CTAs */
+.hero-ctas {
+  margin-top: 30px;
+  display: flex;
+  gap: 15px;
+}
+.btn-primary {
+  background: #000;
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn-primary:hover { background: #1f2937; }
+.btn-secondary {
+  background: transparent;
+  color: #6b7280;
+  border: 1px solid #d1d5db;
+  padding: 14px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn-secondary:hover { background: #f9fafb; }
+
+/* Search */
+.hero-search { margin-top: 40px; }
+.hero-search input[type="search"]{
+  width: 100%;
+  max-width: 600px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 14px 20px;
+  font-size: 15px;
+  color: #111827;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.hero-search input::placeholder { color: #9ca3af; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .site-nav { display: none; }
+  .burger { display: inline-block; }
+  .site-header__inner { padding: 12px 20px; }
+  .mobile-overlay { display: none; } /* shown via inline style when opened by JS */
+
+  .hero-section { padding: 50px 20px; }
+  .hero-title { font-size: 24px; }
+  .hero-subtitle { font-size: 16px; }
+  .hero-ctas { flex-direction: column; }
+  .btn-primary, .btn-secondary { width: 100%; text-align: center; }
+}
+
+/* Ensure overlay hidden by default for JS toggling */
+#mobileOverlay { display: none; }
+</style>
+
+<section class="hero-section">
+  <div class="hero-container">
+    <a href="#accueil" class="hero-logo">
+      <img src="https://nird.forge.apps.education.fr/img/logo+text206px.png" alt="NIRD - Logo" loading="lazy">
+    </a>
+    
+    <h1 class="hero-title">Démarche DIRD - Ressources Éducatives Collaboratives</h1>
+    <p class="hero-subtitle">Initiative collective d'enseignants pour partager les meilleures ressources pédagogiques</p>
+    <button class="hero-btn primary">Rejoindre la communauté</button>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-number">1.2K</span>
+        <span class="stat-label">Enseignants</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">847</span>
+        <span class="stat-label">Ressources</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">42</span>
+        <span class="stat-label">Collectivités</span>
+      </div>
+    </div>
+
+    <div class="hero-badges">
+      <a href="#accueil" class="hero-badge">🐝 Accueil</a>
+      <a href="#demarche" class="hero-badge">🚸 Démarche</a>
+      <a href="#pilotes" class="hero-badge">🏫 Pilotes</a>
+      <a href="#linux" class="hero-badge">🐧 Linux</a>
+      <a href="#outils" class="hero-badge">🧰 Boîte à outils</a>
+      <a href="#reconditionnement" class="hero-badge">♻️ Reconditionnement</a>
+      <a href="#collectivites" class="hero-badge">🏛️ Collectivités</a>
+      <a href="#pourquoi" class="hero-badge">❓ Pourquoi</a>
+    </div>
+  </div>
+</section>

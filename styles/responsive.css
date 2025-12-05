@@ -1,0 +1,11 @@
+@media (min-width: var(--bp-sm)){
+  .container{max-width:680px;}
+}
+@media (min-width: var(--bp-md)){
+  .container{max-width:920px;}
+  .col-6{flex:0 0 50%;}
+}
+@media (min-width: var(--bp-lg)){
+  .container{max-width:1200px;}
+  .col-4{flex:0 0 33.333%;}
+}

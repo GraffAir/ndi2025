@@ -1,0 +1,50 @@
+{
+  "presets": ["@babel/preset-env"],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": ["./src"],
+        "alias": {
+          // 📁 BASE
+          "@models": "./src/models",
+          "@controllers": "./src/controllers",
+          "@routes": "./src/routes",
+          "@views": "./src/views",
+          "@utils": "./src/utils",
+          "@shortcuts": "./src/shortcuts",
+          "@config": "./src/config",
+          "@db": "./src/database",
+          
+          // 👥 MODELS AUTO-GÉNÉRÉS (toutes vos tables)
+          "@users": "./src/models/utilisateurs",
+          "@softs": "./src/models/logiciels",
+          "@avis": "./src/models/avis",
+          "@products": "./src/models/products",
+          "@orders": "./src/models/orders",
+          
+          // 🎮 CTRL AUTO-GÉNÉRÉS
+          "@usersCtrl": "./src/controllers/utilisateursController",
+          "@softsCtrl": "./src/controllers/logicielsController",
+          "@avisCtrl": "./src/controllers/avisController",
+          
+          // 🔧 EXTERNES
+          "@sqlite3": "sqlite3",
+          "@express": "express",
+          "@ejs": "ejs",
+          
+          // 🌟 UTILS GÉNÉRIQUES
+          "@success": "./src/utils/response",
+          "@paginate": "./src/utils/pagination",
+          "@logger": "./src/utils/logger",
+          
+          // 📍 RACINE
+          "@": "./src"
+        }
+      }
+    ],
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-transform-runtime"
+  ]
+}

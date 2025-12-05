@@ -1,0 +1,20 @@
+/* Container system */
+.container{
+  width:100%;
+  margin-left:auto;
+  margin-right:auto;
+  padding-left:var(--space-md);
+  padding-right:var(--space-md);
+  max-width:1200px;
+}
+
+/* Grid utilities */
+.row{display:flex; flex-wrap:wrap; gap:var(--space-md);}
+.col{flex:1 1 0%;}
+
+/* Header/Footer */
+.site-header, .site-footer{
+  padding:var(--space-lg) 0;
+  background:transparent;
+}
+.site-header .brand{font-weight:700;}

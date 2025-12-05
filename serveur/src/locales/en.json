@@ -1,0 +1,36 @@
+{
+  "site": {
+    "title": "DIRD"
+  },
+  "nav": {
+    "home": "Home",
+    "softwares": "Softwares",
+    "users": "Users"
+  },
+  "home": {
+    "welcome": "Welcome to the NIRD Initiative",
+    "description": "Page-specific content for the homepage.",
+    "api_test_button": "Test API",
+    "click_to_test": "Click to test"
+  },
+  "api": {
+    "ready": "API ready!",
+    "status_ok": "API DIRD OK"
+  },
+  "footer": {
+    "about_title": "About the DIRD project",
+    "about_text": "This site is initiated by a teaching collective and published under an open license.",
+    "links_title": "Quick links",
+    "legal_title": "Legal information",
+    "host_info": "Hosted on the Forge of digital commons",
+    "copyright": "© 2025 DIRD"
+  }
+  ,
+  "popular": {
+    "title": "Most popular applications",
+    "subtitle": "The most used educational tools by the NIRD community",
+    "no_apps": "No popular applications at the moment",
+    "view_all": "View all applications"
+  }
+}
+
