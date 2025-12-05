@@ -63,6 +63,9 @@ function naviguer(){
         case "quiz/messagerie":
             window.location.href = "template.html?page=quiz/bureautique";
             break;
+        case "quiz/bureautique":
+            window.location.href = "template.html?page=quiz/navigateur";
+            break;
         default:
             window.location.href = "template.html?page=quiz/debut";
     }
