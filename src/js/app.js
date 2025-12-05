@@ -13,6 +13,7 @@ fetch(`pages/${page}.html`)
     .then(html => {
         document.getElementById('main-content').innerHTML = html;
         gererChoix();
+        afficherResultats();
     })
     .catch(err => {
         console.error('Erreur :', err);
@@ -30,7 +31,27 @@ function gererChoix() {
     });
 }
 
+function injectResult(container, value){
+    container.insertAdjacentHTML('beforeend', '<li>'+value+'</li>');
+}
+
+function checkResults(key, possibleValues, container){
+    const reponseUtilisateur = sessionStorage.getItem(key);
+    if(possibleValues.includes(reponseUtilisateur)){
+        injectResult(container, reponseUtilisateur);
+    }
+}
+
 function afficherResultats(){
+    const mainContent = document.getElementById('results-list');
+    if (mainContent === null){return;}
+    checkResults('quizOS', ['windows', 'apple'], mainContent);
+    checkResults('quizBureautique', ['microsoft', 'google'], mainContent);
+    checkResults('quizENT', ['pronote', 'neo'], mainContent);
+    checkResults('quizMail', ['gmail'], mainContent);
+    checkResults('quizNavigateur', ['closed-source', 'chromium', 'chrome'], mainContent);
+    checkResults('quizRecherche', ['google', 'bing', 'yahoo', 'closed-source'], mainContent);
+
 
 }
 
