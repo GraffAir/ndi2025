@@ -17,6 +17,16 @@ En plus de ce défi national, nous nous sommes engagés à accomplir les défis 
 - [**Hidden Snake**](https://www.nuitdelinfo.com/inscription/defis/483) nous invitant à cacher un jeu snake quelque part dans notre application web.
 - [**Formulaire de la gloire**](https://www.nuitdelinfo.com/inscription/defis/491) demandant lui de créer un formulaire de contact le plus amusant et original possible.
 
+### Réalisation du défi principal
+Pour réaliser le défi principal, nous avons décidé d'analyser en profondeur le besoin qui émergeait de l'association La Forge. 
+
+Nous avons décidé de faire une production axée sur la promotion des logiciels open-source, spécifiquement dans le cadre des établissements scolaires.
+
+Notre application web incorpore donc plusieurs éléments pour atteindre cet objectif :
+- un long registre d'applications open-source et propriétaires groupées par catégorie, permettant facilement de trouver les alternatives les plus recommandées pour un logiciel propriétaire donné.
+- un moteur de recherche interne permettant de rapidement rechercher une application spécifique
+- un questionnaire interactif et ludique, qui permet de faciliter tout ce processus en offrant une expérience simple et ergonomique, et qui finit par une liste des applications propriétaires sur lesquelles l'établissement scolaire est dépendant ainsi que les alternatives proposées.
+
 ## Collaborateurs
 Cette réalisation a été faite avec une équipe de choc : Baptiste Bradelet, Rafaël Graff, Romain Loynet, Mateo Raguin, Clément Vidal, Jerry Cheng, Thibaut Annedouche et Maxime Aillot.
 
