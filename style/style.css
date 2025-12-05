@@ -59,7 +59,7 @@ h1 {
 /* ========================================
    FORMULAIRE & INPUTS
    ======================================== */
-form#badUiForm {
+div#badUiForm {
     width: 100%;
     display: flex;
     flex-direction: column;
