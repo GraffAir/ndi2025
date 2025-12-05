@@ -3,7 +3,7 @@
 Bienvenue sur le dépôt officiel de l'équipe IAMS3 de la **Nuit de l'info édition 2025** !
 
 - Site web nuit de l'info : https://www.nuitdelinfo.com/
-- Voir le site : (TO BE DEVELOPED)
+- Voir le site : https://ndi.ghostdev.de/
 
 La nuit de l'info est un concours de développement d'application web sur une nuit, de ~16h à ~8h. En plus d'un défi national imposé, chaque équipe peut choisir jusqu'à 5 défis à accomplir durant la nuit, chacun pouvant apporter des récompenses variées.
 
@@ -26,6 +26,9 @@ Notre application web incorpore donc plusieurs éléments pour atteindre cet obj
 - un long registre d'applications open-source et propriétaires groupées par catégorie, permettant facilement de trouver les alternatives les plus recommandées pour un logiciel propriétaire donné.
 - un moteur de recherche interne permettant de rapidement rechercher une application spécifique
 - un questionnaire interactif et ludique, qui permet de faciliter tout ce processus en offrant une expérience simple et ergonomique, et qui finit par une liste des applications propriétaires sur lesquelles l'établissement scolaire est dépendant ainsi que les alternatives proposées.
+
+### Accès au défi gloire
+Vous pouvez le voir sur https://ndi.ghostdev.de/gloire
 
 ## Collaborateurs
 Cette réalisation a été faite avec une équipe de choc : Baptiste Bradelet, Rafaël Graff, Romain Loynet, Mateo Raguin, Clément Vidal, Jerry Cheng, Thibaut Annedouche et Maxime Aillot.
