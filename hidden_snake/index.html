@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Snake — JS</title>
+  </head>
+  <body>
+    <div>
+      <button></button>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      Sunt soluta distinctio nisi perspiciatis est sequi explicabo sed id
+      facilis, dolore unde consectetur laborum accusantium? Nulla, quo nobis.
+      Voluptates, quas enim.
+    </div>
+    <div
+      style="
+        display: none;
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        left: 0;
+        top: 0;
+      "
+    >
+      <link rel="stylesheet" href="../style/styleSnake.css" />
+      <div class="container">
+        <div>
+          <h1>Snake</h1>
+          <div class="controls">
+            <span>Score </span>
+            <span id="score">: 0</span>
+            <button id="btnPause">Pause</button>
+            <button id="btnRestart">Restart</button>
+          </div>
+          <canvas id="game" width="400" height="400" tabindex="0"></canvas>
+          <p class="hint">Use the arrows ← ↑ → ↓ to play. Space for pause</p>
+        </div>
+      </div>
+      <script src="../script/hidden_snake/script.js"></script>
+    </div>
+  </body>
+</html>

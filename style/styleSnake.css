@@ -1,0 +1,81 @@
+@font-face {
+  font-family: "METAG";
+  src: url("../Font/METAG___.TTF") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "META2";
+  src: url("../Font/MGS2.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+#score {
+  font-family: "META2", sans-serif;
+  font-size: 20px;
+}
+
+h1 {
+  font-size: 500%;
+  letter-spacing: 7px;
+}
+#hint {
+}
+
+.container {
+  background: #0f1724;
+  color: #e6eef8;
+  text-align: center;
+  box-sizing: border-box;
+  font-family: "METAG", sans-serif;
+
+  min-height: 100vh;      /* full screen */
+  display: flex;          /* flex context */
+  justify-content: center;/* horizontal */
+  align-items: center;    /* vertical */
+}
+
+h1 {
+  margin: 0 0 12px;
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+canvas {
+  background: #081223;
+  border: 4px solid #12263b;
+  border-radius: 8px;
+  display: block;
+  margin: 0 auto;
+}
+
+.hint {
+  font-size: 13px;
+  color: #9fb0c8;
+  margin-top: 8px;
+}
+
+button {
+  background: #1f6feb;
+  border: none;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+#score {
+  font-weight: 600;
+}
